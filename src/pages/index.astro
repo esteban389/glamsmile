@@ -1,5 +1,6 @@
 ---
 import HeroCinematic from "../components/HeroCinematic.astro";
+import WhyChooseUs from "../components/WhyChooseUs.astro";
 ---
 
 <html lang="es">
@@ -12,5 +13,48 @@ import HeroCinematic from "../components/HeroCinematic.astro";
 	</head>
 	<body style="height: 400vh;">
 		<HeroCinematic />
+		<WhyChooseUs />
 	</body>
 </html>
+
+<style is:global>
+	:root{
+		--color-bg: #0b0c0f;
+		--color-surface: #111318;
+		--color-text: #eaeef5;
+		--color-muted: #b8c0cc;
+		--color-accent: #f3c98b;
+		--color-accent-contrast: #111318;
+		--color-focus: #88c0ff;
+
+		--font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+			"Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+			"Segoe UI Emoji";
+		--font-weight-regular: 400;
+		--font-weight-medium: 500;
+		--font-weight-semibold: 600;
+		--font-weight-bold: 700;
+
+		--max-content-width: 1200px;
+		--why-bg: #f4f6f8;
+		--why-surface: #ffffff;
+		--why-text: #1d232f;
+		--why-muted: #4b5565;
+		--why-accent: #f3c98b;
+	}
+
+	body {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+
+		/* Fonts */
+		font-family: var(--font-sans);
+		font-weight: var(--font-weight-regular);
+		font-size: 16px;
+		line-height: 1.6;
+		color: var(--color-text);
+		background: var(--color-bg);
+		overflow-x: hidden;
+	}
+</style>

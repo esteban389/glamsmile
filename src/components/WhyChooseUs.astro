@@ -1,0 +1,181 @@
+<section class="why" aria-labelledby="why-title">
+	<div class="bg-layer" aria-hidden="true"></div>
+	<div class="container">
+		<div class="media">
+			<picture>
+				<source srcset="/assets/doctors.avif" type="image/avif" />
+				<source srcset="/assets/doctors.webp" type="image/webp" />
+				<img src="/assets/doctors.jpg" alt="Equipo Glam Smile: especialistas en odontología estética" loading="lazy" decoding="async" width="900" height="1200" />
+			</picture>
+			<span class="gold-curve" aria-hidden="true"></span>
+		</div>
+		<div class="content">
+			<div class="card">
+				<h2 id="why-title">¿Por qué escogernos?</h2>
+				<p>
+					Con más de <strong>➕5000 pacientes</strong> satisfechos, nuestro equipo de
+					especialistas en Odontología Estética se ha consolidado como referente en el
+					diseño de sonrisas naturales, armónicas y duraderas.
+				</p>
+				<p>
+					Nuestra filosofía se basa en la unión de <strong>ciencia, arte y tecnología</strong>.
+					Cada sonrisa que diseñamos es el resultado de un estudio detallado de la forma
+					del rostro, la proporción dental y las necesidades específicas de cada paciente.
+					Así logramos resultados que no solo transforman tu sonrisa, sino también la
+					forma en la que te percibes y proyectas al mundo.
+				</p>
+				<p>
+					Sabemos que cada persona es única, por eso nuestros tratamientos son 100%
+					personalizados. Trabajamos con materiales de la más alta calidad —desde
+					<strong>resinas de estética monolítica</strong> hasta <strong>carillas cerámicas</strong> y
+					<strong>lentes en disilicato de litio</strong>— para garantizar durabilidad, naturalidad y
+					seguridad en cada procedimiento.
+				</p>
+				<p>
+					Elegirnos significa optar por un equipo que combina años de experiencia
+					clínica, atención cercana y un compromiso inquebrantable con la excelencia. No
+					se trata solo de mejorar tu sonrisa: se trata de <strong>devolver tu confianza</strong> y
+					ayudarte a mostrar tu mejor versión.
+				</p>
+
+				<ul class="pillars" aria-label="Nuestros valores">
+					<li>
+						<span class="icon" aria-hidden="true">🎯</span>
+						<span>Experiencia</span>
+					</li>
+					<li>
+						<span class="icon" aria-hidden="true">🧬</span>
+						<span>Tecnología</span>
+					</li>
+					<li>
+						<span class="icon" aria-hidden="true">✨</span>
+						<span>Personalización</span>
+					</li>
+					<li>
+						<span class="icon" aria-hidden="true">🤝</span>
+						<span>Confianza</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.why {
+		position: relative;
+		background: var(--why-bg);
+		color: var(--why-text);
+		overflow: clip;
+		padding: clamp(48px, 8vw, 120px) 0;
+	}
+
+	.bg-layer {
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,1) 100%),
+			radial-gradient(1200px 60% at 80% 20%, rgba(243,201,139,0.12), transparent 60%),
+			radial-gradient(900px 50% at 20% 80%, rgba(17,19,24,0.06), transparent 60%);
+		mask-image: radial-gradient(90% 70% at 50% 50%, black 60%, transparent 100%);
+		pointer-events: none;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 1.05fr 0.95fr;
+		gap: clamp(20px, 4vw, 48px);
+		align-items: center;
+		padding: 0 clamp(16px, 3vw, 24px);
+		position: relative;
+	}
+
+	.media {
+		position: relative;
+		background: var(--why-surface);
+		border-radius: 20px;
+		box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+		overflow: hidden;
+		transform: translateY(0);
+		animation: float-up linear both;
+		animation-timeline: view();
+		animation-range: entry 0% cover 60%;
+	}
+
+	.media img { display: block; width: 100%; height: auto; }
+
+	/* Elegant gold curve accent */
+	.gold-curve {
+		position: absolute;
+		left: -10%;
+		bottom: 12%;
+		width: 140%;
+		height: 2px;
+		background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--why-accent) 80%, white 20%), transparent);
+		filter: drop-shadow(0 2px 6px rgba(243,201,139,0.35));
+	}
+
+	.content { position: relative; }
+
+	.card {
+		position: relative;
+		background: color-mix(in oklab, var(--why-surface) 85%, white 15%);
+		border: 1px solid color-mix(in oklab, #000 8%, transparent);
+		border-radius: 18px;
+		padding: clamp(18px, 2.2vw, 28px);
+		box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+		backdrop-filter: blur(3px);
+		/* Overlap composition */
+		margin-top: clamp(-60px, -6vw, -90px);
+		z-index: 1;
+	}
+
+	/* subtle top shine */
+	.card::before {
+		content: '';
+		position: absolute;
+		top: -1px;
+		left: 12%;
+		width: 76%;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+		pointer-events: none;
+	}
+
+	.card h2 { margin: 0 0 12px; font-size: clamp(24px, 3.2vw, 36px); }
+	.card p { margin: 0 0 12px; color: var(--why-muted); line-height: 1.65; }
+
+	.pillars {
+		margin: 20px 0 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.pillars li {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		background: var(--why-surface);
+		border: 1px solid color-mix(in oklab, #000 8%, transparent);
+		border-radius: 999px;
+		padding: 10px 14px;
+		font-weight: 500;
+	}
+
+	.icon { font-size: 18px; }
+
+	@keyframes float-up {
+		from { transform: translateY(10px); opacity: 0.96; }
+		to { transform: translateY(0); opacity: 1; }
+	}
+
+	@media (max-width: 1024px) {
+		.container { grid-template-columns: 1fr; }
+		.card { margin-top: -40px; }
+	}
+</style>
