@@ -6,9 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "optimize:image": "node ./scripts/optimize-image.mjs ./public/assets/man_smile_2.png ./public/assets"
   },
   "dependencies": {
     "astro": "^5.13.5"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.4"
   }
 }
