@@ -1,0 +1,205 @@
+<section class="how" aria-labelledby="how-title">
+	<div class="container">
+		<h2 id="how-title">¿Cómo lo hacemos?</h2>
+		<p class="intro">
+			En Glam Smile creemos que un tratamiento exitoso empieza con una experiencia clara y confiable. 
+			Por eso hemos diseñado un proceso sencillo, rápido y personalizado que te acompaña en cada etapa:
+		</p>
+		
+		<div class="steps">
+			<div class="step">
+				<div class="step-icon">
+					<span aria-hidden="true">🔍</span>
+				</div>
+				<h3>Evaluación profesional</h3>
+				<p>Revisamos tu caso de manera online o presencial, con un diagnóstico detallado para entender tus necesidades y expectativas.</p>
+			</div>
+			
+			<div class="step">
+				<div class="step-icon">
+					<span aria-hidden="true">📅</span>
+				</div>
+				<h3>Presupuesto y agenda</h3>
+				<p>Recibes una propuesta clara y personalizada, y programamos tu tratamiento en la fecha que mejor se ajuste a ti.</p>
+			</div>
+			
+			<div class="step">
+				<div class="step-icon">
+					<span aria-hidden="true">✈️</span>
+				</div>
+				<h3>Visita a nuestra clínica en Colombia</h3>
+				<p>Te recibimos en nuestras instalaciones, con atención cálida y un ambiente diseñado para tu comodidad.</p>
+			</div>
+			
+			<div class="step">
+				<div class="step-icon">
+					<span aria-hidden="true">😊</span>
+				</div>
+				<h3>Tu nueva sonrisa en 24/48 horas</h3>
+				<p>En uno o dos días obtendrás una sonrisa perfecta, natural y duradera gracias a nuestra tecnología y materiales de alta calidad.</p>
+			</div>
+			
+			<div class="step">
+				<div class="step-icon">
+					<span aria-hidden="true">📹</span>
+				</div>
+				<h3>Acompañamiento virtual</h3>
+				<p>Te ofrecemos seguimiento y soporte a través de Google Meet o WhatsApp para garantizar tu tranquilidad y los mejores resultados.</p>
+			</div>
+		</div>
+		
+		<div class="tagline">
+			<p>👉 <strong>Te acompañamos en cada etapa, desde el diagnóstico hasta tu nueva sonrisa.</strong></p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.how {
+		background: var(--why-surface);
+		color: var(--why-text);
+		padding: clamp(48px, 8vw, 120px) 0;
+		position: relative;
+		overflow: clip;
+	}
+
+	.how::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--why-accent) 60%, transparent), transparent);
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 clamp(16px, 3vw, 24px);
+		text-align: center;
+	}
+
+	.how h2 {
+		margin: 0 0 16px;
+		font-size: clamp(28px, 4vw, 42px);
+		font-weight: var(--font-weight-semibold);
+	}
+
+	.intro {
+		max-width: 600px;
+		margin: 0 auto 48px;
+		color: var(--why-muted);
+		line-height: 1.6;
+		font-size: clamp(16px, 1.8vw, 18px);
+	}
+
+	.steps {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 32px;
+		margin-bottom: 48px;
+		position: relative;
+	}
+
+	.step {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.step-icon {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		background: var(--why-surface);
+		border: 2px solid color-mix(in oklab, var(--why-accent) 40%, transparent);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 32px;
+		margin-bottom: 16px;
+		box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+		position: relative;
+		z-index: 2;
+	}
+
+	.step-icon::before {
+		content: '';
+		position: absolute;
+		inset: -2px;
+		border-radius: 50%;
+		background: linear-gradient(45deg, var(--why-accent), transparent, var(--why-accent));
+		z-index: -1;
+		opacity: 0.3;
+	}
+
+	.step h3 {
+		margin: 0 0 8px;
+		font-size: clamp(16px, 2vw, 18px);
+		font-weight: var(--font-weight-semibold);
+		color: var(--why-text);
+	}
+
+	.step p {
+		margin: 0;
+		color: var(--why-muted);
+		line-height: 1.5;
+		font-size: clamp(14px, 1.6vw, 16px);
+		max-width: 280px;
+	}
+
+	/* Connecting curve */
+	.steps::before {
+		content: '';
+		position: absolute;
+		top: 40px;
+		left: 10%;
+		right: 10%;
+		height: 2px;
+		background: linear-gradient(90deg, 
+			transparent 0%, 
+			color-mix(in oklab, var(--why-accent) 30%, transparent) 20%, 
+			color-mix(in oklab, var(--why-accent) 60%, transparent) 50%, 
+			color-mix(in oklab, var(--why-accent) 30%, transparent) 80%, 
+			transparent 100%
+		);
+		z-index: 1;
+		border-radius: 1px;
+	}
+
+	.tagline {
+		background: color-mix(in oklab, var(--why-accent) 8%, var(--why-surface) 92%);
+		border: 1px solid color-mix(in oklab, var(--why-accent) 20%, transparent);
+		border-radius: 16px;
+		padding: 20px 24px;
+		max-width: 500px;
+		margin: 0 auto;
+	}
+
+	.tagline p {
+		margin: 0;
+		font-size: clamp(16px, 1.8vw, 18px);
+		color: var(--why-text);
+		line-height: 1.5;
+	}
+
+	@media (max-width: 768px) {
+		.steps {
+			grid-template-columns: 1fr;
+			gap: 24px;
+		}
+		
+		.steps::before {
+			display: none;
+		}
+		
+		.step-icon {
+			width: 70px;
+			height: 70px;
+			font-size: 28px;
+		}
+	}
+</style>
