@@ -1,0 +1,155 @@
+<section class="services" aria-labelledby="services-title">
+	<div class="container">
+		<div class="services-header">
+			<h2 id="services-title">Nuestros Servicios</h2>
+			<p class="intro">
+				En Glam Smile ofrecemos tratamientos de Odontología Estética diseñados para transformar tu sonrisa con naturalidad, armonía y seguridad. Trabajamos únicamente con materiales de la más alta calidad y con un enfoque totalmente personalizado para cada paciente.
+			</p>
+		</div>
+
+		<div class="services-grid">
+			<div class="service-item">
+				<div class="service-icon" aria-hidden="true">💻</div>
+				<h3>Diseño de sonrisa digital</h3>
+				<p>Planificación personalizada de tu nueva sonrisa antes del procedimiento.</p>
+			</div>
+
+			<div class="service-item">
+				<div class="service-icon" aria-hidden="true">🦷</div>
+				<h3>Carillas cerámicas</h3>
+				<p>Resultados duraderos, resistentes y con un acabado altamente estético.</p>
+			</div>
+
+			<div class="service-item">
+				<div class="service-icon" aria-hidden="true">💎</div>
+				<h3>Lentes en disilicato de litio</h3>
+				<p>Máxima naturalidad y resistencia para transformar tu sonrisa.</p>
+			</div>
+
+			<div class="service-item">
+				<div class="service-icon" aria-hidden="true">🎨</div>
+				<h3>Resinas estéticas monolíticas</h3>
+				<p>Una solución práctica y estética para mejorar la forma y el color dental.</p>
+			</div>
+
+			<div class="service-item">
+				<div class="service-icon" aria-hidden="true">✨</div>
+				<h3>Blanqueamiento dental</h3>
+				<p>Para una sonrisa más brillante y juvenil.</p>
+			</div>
+
+			<div class="service-item">
+				<div class="service-icon" aria-hidden="true">🎯</div>
+				<h3>Tratamientos personalizados</h3>
+				<p>Cada sonrisa es única, por eso cada procedimiento es 100% adaptado a ti.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.services {
+		padding: clamp(60px, 8vw, 100px) 20px;
+		background: var(--color-surface);
+		position: relative;
+	}
+
+	.services-header {
+		text-align: center;
+		max-width: 800px;
+		margin: 0 auto 60px;
+	}
+
+	.services-header h2 {
+		font-size: clamp(32px, 4vw, 48px);
+		font-weight: var(--font-weight-bold);
+		margin: 0 0 20px;
+		color: var(--color-text);
+	}
+
+	.services-header .intro {
+		font-size: clamp(16px, 1.5vw, 18px);
+		line-height: 1.6;
+		color: var(--color-muted);
+		margin: 0;
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 30px;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.service-item {
+		text-align: center;
+		padding: 30px 20px;
+		background: rgba(255, 255, 255, 0.03);
+		border-radius: 16px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		transition: all 0.3s ease;
+	}
+
+	.service-item:hover {
+		transform: translateY(-5px);
+		background: rgba(255, 255, 255, 0.05);
+		border-color: var(--color-accent);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	}
+
+	.service-icon {
+		font-size: 48px;
+		margin-bottom: 20px;
+		display: inline-block;
+	}
+
+	.service-item h3 {
+		font-size: 20px;
+		font-weight: var(--font-weight-semibold);
+		margin: 0 0 12px;
+		color: var(--color-text);
+	}
+
+	.service-item p {
+		font-size: 16px;
+		line-height: 1.5;
+		color: var(--color-muted);
+		margin: 0;
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 768px) {
+		.services {
+			padding: 50px 20px;
+		}
+
+		.services-header {
+			margin-bottom: 40px;
+		}
+
+		.services-grid {
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 20px;
+		}
+
+		.service-item {
+			padding: 25px 15px;
+		}
+
+		.service-icon {
+			font-size: 40px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.services-grid {
+			grid-template-columns: 1fr;
+			gap: 15px;
+		}
+
+		.service-item {
+			padding: 20px 15px;
+		}
+	}
+</style>
