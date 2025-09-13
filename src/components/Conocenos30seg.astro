@@ -89,24 +89,14 @@
 
 				<button class="carousel-btn prev" aria-label="Anterior">‹</button>
 				<button class="carousel-btn next" aria-label="Siguiente">›</button>
-
-				<div class="carousel-dots">
-					<button class="dot active" data-slide="0"></button>
-					<button class="dot" data-slide="1"></button>
-					<button class="dot" data-slide="2"></button>
-					<button class="dot" data-slide="3"></button>
-					<button class="dot" data-slide="4"></button>
-					<button class="dot" data-slide="5"></button>
-				</div>
 			</div>
 		</div>
 	</div>
 
-	<script>
+	<script lang="ts">
 		document.addEventListener('DOMContentLoaded', function() {
 			const track = document.querySelector('.carousel-track');
 			const slides = document.querySelectorAll('.carousel-slide');
-			const dots = document.querySelectorAll('.dot');
 			const prevBtn = document.querySelector('.carousel-btn.prev');
 			const nextBtn = document.querySelector('.carousel-btn.next');
 
@@ -121,11 +111,6 @@
 
 				currentSlide = slideIndex;
 				track.style.transform = `translateX(-${slideIndex * 100}%)`;
-
-				// Actualizar dots
-				dots.forEach((dot, index) => {
-					dot.classList.toggle('active', index === slideIndex);
-				});
 
 				// Reiniciar autoplay
 				startAutoplay();
@@ -168,14 +153,6 @@
 					nextSlide();
 				});
 			}
-
-			// Dots navigation
-			dots.forEach((dot, index) => {
-				dot.addEventListener('click', () => {
-					stopAutoplay();
-					goToSlide(index);
-				});
-			});
 
 			// Iniciar carousel
 			startAutoplay();
