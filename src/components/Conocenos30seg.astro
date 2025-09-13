@@ -1,0 +1,394 @@
+<section class="conocenos-30seg" aria-labelledby="conocenos-title">
+	<div class="container">
+		<header class="intro">
+			<h2 id="conocenos-title">Conócenos en 30 segundos</h2>
+			<p>Transformamos sonrisas, cambiamos vidas</p>
+		</header>
+
+		<div class="carousel-container">
+			<div class="carousel">
+				<div class="carousel-track">
+					<div class="carousel-slide">
+						<video
+							src="/assets/conocenos_1.mp4"
+							muted
+							playsinline
+							preload="metadata"
+							aria-label="Video: Transformación de sonrisas"
+						></video>
+						<div class="slide-info">
+							<h3>Transformación Completa</h3>
+						</div>
+					</div>
+
+					<div class="carousel-slide">
+						<video
+							src="/assets/conocenos_2.mp4"
+							muted
+							playsinline
+							preload="metadata"
+							aria-label="Video: Nuestro equipo de especialistas"
+						></video>
+						<div class="slide-info">
+							<h3>Nuestro Equipo</h3>
+						</div>
+					</div>
+
+					<div class="carousel-slide">
+						<video
+							src="/assets/conocenos_3.mp4"
+							muted
+							playsinline
+							preload="metadata"
+							aria-label="Video: Tecnología dental avanzada"
+						></video>
+						<div class="slide-info">
+							<h3>Tecnología Avanzada</h3>
+						</div>
+					</div>
+
+					<div class="carousel-slide">
+						<video
+							src="/assets/conocenos_4.mp4"
+							muted
+							playsinline
+							preload="metadata"
+							aria-label="Video: Testimonios de pacientes"
+						></video>
+						<div class="slide-info">
+							<h3>Testimonios Reales</h3>
+						</div>
+					</div>
+
+					<div class="carousel-slide">
+						<video
+							src="/assets/conocenos_5.mp4"
+							muted
+							playsinline
+							preload="metadata"
+							aria-label="Video: Proceso de tratamiento"
+						></video>
+						<div class="slide-info">
+							<h3>Nuestro Proceso</h3>
+						</div>
+					</div>
+
+					<div class="carousel-slide">
+						<video
+							src="/assets/conocenos_6.mp4"
+							muted
+							playsinline
+							preload="metadata"
+							aria-label="Video: Resultados antes y después"
+						></video>
+						<div class="slide-info">
+							<h3>Resultados Amazing</h3>
+						</div>
+					</div>
+				</div>
+
+				<button class="carousel-btn prev" aria-label="Anterior">‹</button>
+				<button class="carousel-btn next" aria-label="Siguiente">›</button>
+
+				<div class="carousel-dots">
+					<button class="dot active" data-slide="0"></button>
+					<button class="dot" data-slide="1"></button>
+					<button class="dot" data-slide="2"></button>
+					<button class="dot" data-slide="3"></button>
+					<button class="dot" data-slide="4"></button>
+					<button class="dot" data-slide="5"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const track = document.querySelector('.carousel-track');
+			const slides = document.querySelectorAll('.carousel-slide');
+			const dots = document.querySelectorAll('.dot');
+			const prevBtn = document.querySelector('.carousel-btn.prev');
+			const nextBtn = document.querySelector('.carousel-btn.next');
+
+			let currentSlide = 0;
+			const totalSlides = slides.length;
+			let autoplayInterval;
+
+			// Función para ir a un slide específico
+			function goToSlide(slideIndex) {
+				if (slideIndex < 0) slideIndex = totalSlides - 1;
+				if (slideIndex >= totalSlides) slideIndex = 0;
+
+				currentSlide = slideIndex;
+				track.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+				// Actualizar dots
+				dots.forEach((dot, index) => {
+					dot.classList.toggle('active', index === slideIndex);
+				});
+
+				// Reiniciar autoplay
+				startAutoplay();
+			}
+
+			// Siguiente slide
+			function nextSlide() {
+				goToSlide(currentSlide + 1);
+			}
+
+			// Anterior slide
+			function prevSlide() {
+				goToSlide(currentSlide - 1);
+			}
+
+			// Iniciar autoplay
+			function startAutoplay() {
+				stopAutoplay();
+				autoplayInterval = setInterval(nextSlide, 5000); // 5 segundos
+			}
+
+			// Detener autoplay
+			function stopAutoplay() {
+				if (autoplayInterval) {
+					clearInterval(autoplayInterval);
+				}
+			}
+
+			// Event listeners
+			if (prevBtn) {
+				prevBtn.addEventListener('click', () => {
+					stopAutoplay();
+					prevSlide();
+				});
+			}
+
+			if (nextBtn) {
+				nextBtn.addEventListener('click', () => {
+					stopAutoplay();
+					nextSlide();
+				});
+			}
+
+			// Dots navigation
+			dots.forEach((dot, index) => {
+				dot.addEventListener('click', () => {
+					stopAutoplay();
+					goToSlide(index);
+				});
+			});
+
+			// Iniciar carousel
+			startAutoplay();
+		});
+	</script>
+</section>
+
+<style>
+	.conocenos-30seg {
+		position: relative;
+		background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #fff5f0 100%);
+		color: #2d3748;
+		padding: clamp(48px, 8vw, 120px) 0;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 clamp(16px, 3vw, 24px);
+	}
+
+	.intro {
+		text-align: center;
+		max-width: 600px;
+		margin: 0 auto clamp(40px, 6vw, 56px);
+	}
+
+	.intro h2 {
+		margin: 0 0 12px;
+		font-size: clamp(32px, 5vw, 42px);
+		font-weight: 700;
+		background: linear-gradient(135deg, #2d3748, #4a5568);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.intro p {
+		margin: 0;
+		font-size: clamp(16px, 1.2vw, 18px);
+		line-height: 1.5;
+		color: #718096;
+		font-weight: 500;
+	}
+
+	.carousel-container {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.carousel {
+		position: relative;
+		overflow: hidden;
+		border-radius: 20px;
+		background: #000;
+		aspect-ratio: 16/9;
+		box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+	}
+
+	.carousel-track {
+		display: flex;
+		transition: transform 0.4s ease-in-out;
+		height: 100%;
+	}
+
+	.carousel-slide {
+		flex: 0 0 100%;
+		position: relative;
+		height: 100%;
+	}
+
+	.carousel-slide video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.slide-info {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 20px;
+		background: linear-gradient(to top,
+			rgba(0,0,0,0.95) 0%,
+			rgba(0,0,0,0.85) 30%,
+			rgba(0,0,0,0.6) 60%,
+			rgba(0,0,0,0.3) 80%,
+			transparent 100%
+		);
+		color: white;
+		z-index: 3;
+		text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+	}
+
+	.slide-info h3 {
+		margin: 0;
+		font-size: clamp(16px, 1.5vw, 20px);
+		font-weight: 600;
+		text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+	}
+
+	.carousel-btn {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		border: 2px solid rgba(255,255,255,0.8);
+		background: rgba(0,0,0,0.8);
+		color: white;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		font-size: 24px;
+		z-index: 10;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+	}
+
+	.carousel-btn:hover {
+		background: rgba(0,0,0,0.95);
+		border-color: white;
+		transform: translateY(-50%) scale(1.1);
+		box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+	}
+
+	.carousel-btn.prev {
+		left: 20px;
+	}
+
+	.carousel-btn.next {
+		right: 20px;
+	}
+
+	.carousel-dots {
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		gap: 8px;
+		z-index: 10;
+	}
+
+	.dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		border: 1px solid rgba(255,255,255,0.6);
+		background: rgba(0,0,0,0.5);
+		cursor: pointer;
+		transition: all 0.3s ease;
+		padding: 0;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+	}
+
+	.dot.active {
+		background: white;
+		border-color: white;
+		transform: scale(1.2);
+		box-shadow: 0 2px 8px rgba(255,255,255,0.4);
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.conocenos-30seg {
+			padding: clamp(32px, 6vw, 64px) 0;
+		}
+
+		.carousel {
+			aspect-ratio: 9/16;
+			max-width: 400px;
+		}
+
+		.intro h2 {
+			font-size: clamp(28px, 6vw, 36px);
+		}
+
+		.carousel-btn {
+			width: 40px;
+			height: 40px;
+			font-size: 20px;
+		}
+
+		.carousel-btn.prev {
+			left: 10px;
+		}
+
+		.carousel-btn.next {
+			right: 10px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.carousel {
+			max-width: 320px;
+			aspect-ratio: 9/19.5;
+		}
+
+		.slide-info h3 {
+			font-size: 16px;
+		}
+
+		.carousel-dots {
+			bottom: 15px;
+		}
+
+		.dot {
+			width: 6px;
+			height: 6px;
+		}
+	}
+</style>
