@@ -104,6 +104,10 @@
 						<span class="mute-icon">🔇</span>
 					</button>
 				</div>
+
+				<div class="progress-bar">
+					<div class="progress-fill"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -122,6 +126,7 @@
 			let currentSlide = 0;
 			const totalSlides = slides.length;
 			let autoplayInterval;
+			let progressInterval;
 			let isPlaying = false;
 			let isMuted = true; // Todos los videos empiezan muteados
 
@@ -136,13 +141,16 @@
 						if (index === currentSlide) {
 							// Reproducir video actual solo si está en modo play
 							if (isPlaying) {
-								video.play().catch(e => {
-									console.log('Autoplay prevented:', e);
+								video.play().then(() => {
+									// Iniciar barra de progreso después de que el video empieza a reproducirse
+									startProgress();
+								}).catch(e => {
 									isPlaying = false;
 									if (playIcon) playIcon.textContent = '▶';
 								});
 							} else {
 								video.pause();
+								stopProgress();
 							}
 
 							// Actualizar estado de los botones
@@ -173,8 +181,10 @@
 					// Reproducir video actual y empezar autoplay
 					const currentVideo = slides[currentSlide]?.querySelector('video');
 					if (currentVideo) {
-						currentVideo.play().catch(e => {
-							console.log('Play failed:', e);
+						currentVideo.play().then(() => {
+							// Iniciar barra de progreso después de que el video empieza
+							startProgress();
+						}).catch(e => {
 							isPlaying = false;
 						});
 					}
@@ -187,6 +197,7 @@
 							video.pause();
 						}
 					});
+					stopProgress();
 					stopAutoplay();
 				}
 
@@ -210,6 +221,47 @@
 				if (muteIcon) muteIcon.textContent = isMuted ? '🔇' : '🔊';
 			}
 
+			// Función para iniciar la barra de progreso
+			function startProgress() {
+				stopProgress();
+				resetProgress();
+
+				const duration = getCurrentSlideDuration();
+				const startTime = Date.now();
+
+
+				progressInterval = setInterval(() => {
+					const elapsed = Date.now() - startTime;
+					const progress = Math.min((elapsed / duration) * 100, 100);
+
+					const progressFill = document.querySelector('.progress-fill');
+					if (progressFill) {
+						progressFill.style.width = `${progress}%`;
+					}
+
+					// Si llegamos al 100%, detener el progreso
+					if (progress >= 100) {
+						stopProgress();
+					}
+				}, 50); // Actualizar cada 50ms para animación suave
+			}
+
+			// Función para detener la barra de progreso
+			function stopProgress() {
+				if (progressInterval) {
+					clearInterval(progressInterval);
+					progressInterval = null;
+				}
+			}
+
+			// Función para reiniciar la barra de progreso
+			function resetProgress() {
+				const progressFill = document.querySelector('.progress-fill');
+				if (progressFill) {
+					progressFill.style.width = '0%';
+				}
+			}
+
 			// Función para ir a un slide específico
 			function goToSlide(slideIndex) {
 				if (slideIndex < 0) slideIndex = totalSlides - 1;
@@ -218,13 +270,15 @@
 				currentSlide = slideIndex;
 				track.style.transform = `translateX(-${slideIndex * 100}%)`;
 
+				// Reiniciar la barra de progreso al cambiar de slide
+				resetProgress();
+
 				// Manejar videos
 				manageVideos();
 
 				// Reiniciar autoplay solo si está reproduciendo
 				if (isPlaying) {
 					const duration = getCurrentSlideDuration();
-					console.log(`Cambiando al video ${slideIndex + 1}, duración: ${duration/1000} segundos`);
 					startAutoplay();
 				}
 			}
@@ -250,7 +304,8 @@
 				const currentSlideElement = slides[currentSlide];
 				const video = currentSlideElement?.querySelector('video');
 				const duration = video?.getAttribute('data-duration');
-				return duration ? parseDuration(duration) : 5000; // Default 5 segundos
+				const parsedDuration = duration ? parseDuration(duration) : 5000;
+				return parsedDuration;
 			}
 
 			// Iniciar autoplay
@@ -265,6 +320,7 @@
 				if (autoplayInterval) {
 					clearInterval(autoplayInterval);
 				}
+				stopProgress();
 			}
 
 			// Event listeners
@@ -531,6 +587,25 @@
 		border-color: white;
 		transform: scale(1.1);
 		box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+	}
+
+	.progress-bar {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: rgba(255,255,255,0.2);
+		z-index: 10;
+		overflow: hidden;
+	}
+
+	.progress-fill {
+		height: 100%;
+		width: 0%;
+		background: linear-gradient(90deg, #f3c98b, #e6b574);
+		transition: width 0.1s linear;
+		box-shadow: 0 0 10px rgba(243,201,139,0.5);
 	}
 
 	/* Responsive Design */
