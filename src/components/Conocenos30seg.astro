@@ -285,19 +285,38 @@
 					// Pausar autoplay cuando está expandido
 					stopAutoplay();
 
-					// Asegurar que el video actual esté reproduciendo
+					// Activar reproducción y audio al expandir
+					isPlaying = true;
+					isMuted = false;
+
+					// Actualizar botones
+					if (playIcon) playIcon.textContent = '⏸';
+					if (muteIcon) muteIcon.textContent = '🔊';
+
+					// Aplicar cambios a todos los videos
+					slides.forEach((slide) => {
+						const video = slide.querySelector('video');
+						if (video) {
+							video.muted = isMuted;
+						}
+					});
+
+					// Reproducir video actual
 					const currentVideo = slides[currentSlide]?.querySelector('video');
-					if (currentVideo && isPlaying) {
-						currentVideo.play().catch(() => {
+					if (currentVideo) {
+						currentVideo.play().then(() => {
+							// Iniciar barra de progreso
+							startProgress();
+						}).catch(() => {
 							// Silenciar error de autoplay
 						});
 					}
 				} else {
-					// Modo normal
+					// Modo normal - volver al estado anterior
 					carousel.classList.remove('expanded');
 					carouselContainer.classList.remove('expanded');
 
-					// Reanudar autoplay si estaba reproduciendo
+					// Mantener reproducción pero reanudar autoplay
 					if (isPlaying) {
 						startAutoplay();
 					}
@@ -746,6 +765,7 @@
 
 	.carousel.expanded .carousel-slide video {
 		border-radius: 20px;
+		object-fit: contain;
 	}
 
 	/* Animación de transición suave */
