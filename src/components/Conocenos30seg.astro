@@ -104,6 +104,23 @@
 			const totalSlides = slides.length;
 			let autoplayInterval;
 
+			// Función para manejar videos
+			function manageVideos() {
+				slides.forEach((slide, index) => {
+					const video = slide.querySelector('video');
+					if (video) {
+						if (index === currentSlide) {
+							// Reproducir video actual
+							video.play().catch(e => console.log('Autoplay prevented:', e));
+						} else {
+							// Pausar otros videos
+							video.pause();
+							video.currentTime = 0;
+						}
+					}
+				});
+			}
+
 			// Función para ir a un slide específico
 			function goToSlide(slideIndex) {
 				if (slideIndex < 0) slideIndex = totalSlides - 1;
@@ -111,6 +128,9 @@
 
 				currentSlide = slideIndex;
 				track.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+				// Manejar videos
+				manageVideos();
 
 				// Reiniciar autoplay
 				startAutoplay();
@@ -154,7 +174,8 @@
 				});
 			}
 
-			// Iniciar carousel
+			// Iniciar carousel y reproducir primer video
+			manageVideos();
 			startAutoplay();
 		});
 	</script>
@@ -201,6 +222,10 @@
 	.carousel-container {
 		max-width: 900px;
 		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.carousel {
@@ -290,35 +315,6 @@
 		right: 20px;
 	}
 
-	.carousel-dots {
-		position: absolute;
-		bottom: 20px;
-		left: 50%;
-		transform: translateX(-50%);
-		display: flex;
-		gap: 8px;
-		z-index: 10;
-	}
-
-	.dot {
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
-		border: 1px solid rgba(255,255,255,0.6);
-		background: rgba(0,0,0,0.5);
-		cursor: pointer;
-		transition: all 0.3s ease;
-		padding: 0;
-		box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-	}
-
-	.dot.active {
-		background: white;
-		border-color: white;
-		transform: scale(1.2);
-		box-shadow: 0 2px 8px rgba(255,255,255,0.4);
-	}
-
 	/* Responsive Design */
 	@media (max-width: 768px) {
 		.conocenos-30seg {
@@ -357,15 +353,6 @@
 
 		.slide-info h3 {
 			font-size: 16px;
-		}
-
-		.carousel-dots {
-			bottom: 15px;
-		}
-
-		.dot {
-			width: 6px;
-			height: 6px;
 		}
 	}
 </style>
