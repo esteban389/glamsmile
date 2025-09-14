@@ -223,6 +223,8 @@
 
 				// Reiniciar autoplay solo si está reproduciendo
 				if (isPlaying) {
+					const duration = getCurrentSlideDuration();
+					console.log(`Cambiando al video ${slideIndex + 1}, duración: ${duration/1000} segundos`);
 					startAutoplay();
 				}
 			}
@@ -237,10 +239,25 @@
 				goToSlide(currentSlide - 1);
 			}
 
+			// Función para convertir mm:ss a milisegundos
+			function parseDuration(durationStr) {
+				const [minutes, seconds] = durationStr.split(':').map(Number);
+				return (minutes * 60 + seconds) * 1000;
+			}
+
+			// Función para obtener la duración del slide actual
+			function getCurrentSlideDuration() {
+				const currentSlideElement = slides[currentSlide];
+				const video = currentSlideElement?.querySelector('video');
+				const duration = video?.getAttribute('data-duration');
+				return duration ? parseDuration(duration) : 5000; // Default 5 segundos
+			}
+
 			// Iniciar autoplay
 			function startAutoplay() {
 				stopAutoplay();
-				autoplayInterval = setInterval(nextSlide, 5000); // 5 segundos
+				const duration = getCurrentSlideDuration();
+				autoplayInterval = setInterval(nextSlide, duration);
 			}
 
 			// Detener autoplay
