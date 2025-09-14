@@ -108,6 +108,11 @@
 				<div class="progress-bar">
 					<div class="progress-fill"></div>
 				</div>
+
+				<!-- Botón de cerrar para modo expandido -->
+				<button class="close-btn" aria-label="Cerrar" style="display: none;">
+					<span>✕</span>
+				</button>
 			</div>
 		</div>
 	</div>
@@ -129,6 +134,7 @@
 			let progressInterval;
 			let isPlaying = false;
 			let isMuted = true; // Todos los videos empiezan muteados
+			let isExpanded = false; // Estado para el modo expandido
 
 			// Función para manejar videos
 			function manageVideos() {
@@ -262,6 +268,42 @@
 				}
 			}
 
+			// Función para expandir/colapsar el video (solo desktop)
+			function toggleExpand() {
+				// Solo permitir en desktop (no mobile)
+				if (window.innerWidth < 768) return;
+
+				isExpanded = !isExpanded;
+				const carousel = document.querySelector('.carousel');
+				const carouselContainer = document.querySelector('.carousel-container');
+
+				if (isExpanded) {
+					// Modo expandido
+					carousel.classList.add('expanded');
+					carouselContainer.classList.add('expanded');
+
+					// Pausar autoplay cuando está expandido
+					stopAutoplay();
+
+					// Asegurar que el video actual esté reproduciendo
+					const currentVideo = slides[currentSlide]?.querySelector('video');
+					if (currentVideo && isPlaying) {
+						currentVideo.play().catch(() => {
+							// Silenciar error de autoplay
+						});
+					}
+				} else {
+					// Modo normal
+					carousel.classList.remove('expanded');
+					carouselContainer.classList.remove('expanded');
+
+					// Reanudar autoplay si estaba reproduciendo
+					if (isPlaying) {
+						startAutoplay();
+					}
+				}
+			}
+
 			// Función para ir a un slide específico
 			function goToSlide(slideIndex) {
 				if (slideIndex < 0) slideIndex = totalSlides - 1;
@@ -345,6 +387,40 @@
 
 			if (muteUnmuteBtn) {
 				muteUnmuteBtn.addEventListener('click', toggleMuteUnmute);
+			}
+
+			// Event listener para click en el carousel (expandir en desktop)
+			const carousel = document.querySelector('.carousel');
+			if (carousel) {
+				carousel.addEventListener('click', (e) => {
+					// No expandir si se hace click en los botones de control
+					if (e.target.closest('.carousel-btn') ||
+						e.target.closest('.video-controls') ||
+						e.target.closest('.progress-bar')) {
+						return;
+					}
+
+					// Solo expandir en desktop
+					if (window.innerWidth >= 768) {
+						toggleExpand();
+					}
+				});
+			}
+
+			// Cerrar con tecla ESC cuando está expandido
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && isExpanded) {
+					toggleExpand();
+				}
+			});
+
+			// Event listener para el botón de cerrar
+			const closeBtn = document.querySelector('.close-btn');
+			if (closeBtn) {
+				closeBtn.addEventListener('click', (e) => {
+					e.stopPropagation();
+					toggleExpand();
+				});
 			}
 
 			// Establecer estados iniciales
@@ -608,11 +684,98 @@
 		box-shadow: 0 0 10px rgba(243,201,139,0.5);
 	}
 
+	/* Botón de cerrar para modo expandido */
+	.close-btn {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		border: 2px solid rgba(255,255,255,0.8);
+		background: rgba(0,0,0,0.8);
+		color: white;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		font-size: 20px;
+		z-index: 20;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.carousel.expanded .close-btn {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.close-btn:hover {
+		background: rgba(0,0,0,0.95);
+		border-color: white;
+		transform: scale(1.1);
+		box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+	}
+
+	/* Modo expandido (solo desktop) */
+	.carousel-container.expanded {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 1000;
+		height: 100vh;
+		width: 100vw;
+		max-width: none;
+		background: rgba(0,0,0,0.95);
+		backdrop-filter: blur(10px);
+	}
+
+	.carousel.expanded {
+		height: 90vh;
+		max-height: 90vh;
+		width: 90vw;
+		max-width: 90vw;
+		margin: 5vh auto;
+		border-radius: 20px;
+		box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+		cursor: default;
+	}
+
+	.carousel.expanded .carousel-slide video {
+		border-radius: 20px;
+	}
+
+	/* Animación de transición suave */
+	.carousel-container {
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.carousel {
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
 	/* Responsive Design */
 	@media (max-width: 768px) {
 		.conocenos-30seg {
 			padding: clamp(32px, 6vw, 64px) 0;
 		}
+
+		/* Deshabilitar modo expandido en móvil */
+		.carousel-container {
+			pointer-events: none;
+		}
+
+		.carousel {
+			pointer-events: auto;
+		}
+
+		.carousel .close-btn {
+			display: none !important;
+		}
+	}
 
 		.carousel {
 			aspect-ratio: 9/16;
