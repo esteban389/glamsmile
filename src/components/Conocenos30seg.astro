@@ -89,6 +89,15 @@
 
 				<button class="carousel-btn prev" aria-label="Anterior">‹</button>
 				<button class="carousel-btn next" aria-label="Siguiente">›</button>
+
+				<div class="video-controls">
+					<button class="video-control-btn play-pause" aria-label="Reproducir/Pausar">
+						<span class="play-icon">▶</span>
+					</button>
+					<button class="video-control-btn mute-unmute" aria-label="Silenciar/Activar sonido">
+						<span class="mute-icon">🔇</span>
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -99,26 +108,100 @@
 			const slides = document.querySelectorAll('.carousel-slide');
 			const prevBtn = document.querySelector('.carousel-btn.prev');
 			const nextBtn = document.querySelector('.carousel-btn.next');
+			const playPauseBtn = document.querySelector('.video-control-btn.play-pause');
+			const muteUnmuteBtn = document.querySelector('.video-control-btn.mute-unmute');
+			const playIcon = document.querySelector('.play-icon');
+			const muteIcon = document.querySelector('.mute-icon');
 
 			let currentSlide = 0;
 			const totalSlides = slides.length;
 			let autoplayInterval;
+			let isPlaying = false;
+			let isMuted = true; // Todos los videos empiezan muteados
 
 			// Función para manejar videos
 			function manageVideos() {
 				slides.forEach((slide, index) => {
 					const video = slide.querySelector('video');
 					if (video) {
+						// Sincronizar estado de mute con el estado global
+						video.muted = isMuted;
+
 						if (index === currentSlide) {
-							// Reproducir video actual
-							video.play().catch(e => console.log('Autoplay prevented:', e));
+							// Reproducir video actual solo si está en modo play
+							if (isPlaying) {
+								video.play().catch(e => {
+									console.log('Autoplay prevented:', e);
+									isPlaying = false;
+									if (playIcon) playIcon.textContent = '▶';
+								});
+							} else {
+								video.pause();
+							}
+
+							// Actualizar estado de los botones
+							if (playIcon) playIcon.textContent = isPlaying ? '⏸' : '▶';
+							if (muteIcon) muteIcon.textContent = isMuted ? '🔇' : '🔊';
 						} else {
-							// Pausar otros videos
+							// Pausar otros videos y reiniciar
 							video.pause();
 							video.currentTime = 0;
 						}
 					}
 				});
+			}
+
+			// Función para toggle play/pause
+			function togglePlayPause() {
+				isPlaying = !isPlaying;
+
+				if (isPlaying) {
+					// Reanudar todos los videos (solo el actual se reproducirá)
+					slides.forEach((slide, index) => {
+						const video = slide.querySelector('video');
+						if (video) {
+							video.muted = isMuted;
+						}
+					});
+
+					// Reproducir video actual y empezar autoplay
+					const currentVideo = slides[currentSlide]?.querySelector('video');
+					if (currentVideo) {
+						currentVideo.play().catch(e => {
+							console.log('Play failed:', e);
+							isPlaying = false;
+						});
+					}
+					startAutoplay();
+				} else {
+					// Pausar todos los videos y detener autoplay
+					slides.forEach((slide) => {
+						const video = slide.querySelector('video');
+						if (video) {
+							video.pause();
+						}
+					});
+					stopAutoplay();
+				}
+
+				// Actualizar botón
+				if (playIcon) playIcon.textContent = isPlaying ? '⏸' : '▶';
+			}
+
+			// Función para toggle mute/unmute
+			function toggleMuteUnmute() {
+				isMuted = !isMuted;
+
+				// Aplicar estado de mute a todos los videos
+				slides.forEach((slide) => {
+					const video = slide.querySelector('video');
+					if (video) {
+						video.muted = isMuted;
+					}
+				});
+
+				// Actualizar botón
+				if (muteIcon) muteIcon.textContent = isMuted ? '🔇' : '🔊';
 			}
 
 			// Función para ir a un slide específico
@@ -132,8 +215,10 @@
 				// Manejar videos
 				manageVideos();
 
-				// Reiniciar autoplay
-				startAutoplay();
+				// Reiniciar autoplay solo si está reproduciendo
+				if (isPlaying) {
+					startAutoplay();
+				}
 			}
 
 			// Siguiente slide
@@ -174,9 +259,22 @@
 				});
 			}
 
-			// Iniciar carousel y reproducir primer video
+			// Event listeners para los botones de video
+			if (playPauseBtn) {
+				playPauseBtn.addEventListener('click', togglePlayPause);
+			}
+
+			if (muteUnmuteBtn) {
+				muteUnmuteBtn.addEventListener('click', toggleMuteUnmute);
+			}
+
+			// Establecer estados iniciales
+			if (playIcon) playIcon.textContent = '▶'; // Empezar pausado
+			if (muteIcon) muteIcon.textContent = '🔇'; // Empezar muteado
+
+			// Iniciar carousel
 			manageVideos();
-			startAutoplay();
+			// No empezar autoplay automáticamente, esperar a que el usuario dé play
 		});
 	</script>
 </section>
@@ -317,6 +415,40 @@
 		right: 20px;
 	}
 
+	.video-controls {
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		gap: 12px;
+		z-index: 10;
+	}
+
+	.video-control-btn {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		border: 2px solid rgba(255,255,255,0.8);
+		background: rgba(0,0,0,0.8);
+		color: white;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		font-size: 18px;
+		backdrop-filter: blur(8px);
+		box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+	}
+
+	.video-control-btn:hover {
+		background: rgba(0,0,0,0.95);
+		border-color: white;
+		transform: scale(1.1);
+		box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+	}
+
 	/* Responsive Design */
 	@media (max-width: 768px) {
 		.conocenos-30seg {
@@ -344,6 +476,12 @@
 
 		.carousel-btn.next {
 			right: 10px;
+		}
+
+		.video-control-btn {
+			width: 44px;
+			height: 44px;
+			font-size: 16px;
 		}
 	}
 
