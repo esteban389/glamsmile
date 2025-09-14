@@ -12,12 +12,6 @@
 			<source src="/assets/agendar-cita.mp4" type="video/mp4">
 		</video>
 		<div class="video-overlay"></div>
-		<div class="play-button" aria-hidden="true">
-			<svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-				<circle cx="30" cy="30" r="30" fill="rgba(255, 255, 255, 0.9)"/>
-				<path d="M22 18L42 30L22 42V18Z" fill="#1D232F"/>
-			</svg>
-		</div>
 	</div>
 
 	<div class="cta-content">
@@ -84,21 +78,6 @@
 		height: 100%;
 		background: rgba(0, 0, 0, 0.4);
 		z-index: 2;
-	}
-
-	.play-button {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		z-index: 3;
-		opacity: 0.8;
-		transition: all 0.3s ease;
-	}
-
-	.play-button:hover {
-		opacity: 1;
-		transform: translate(-50%, -50%) scale(1.1);
 	}
 
 	.cta-content {
@@ -200,11 +179,6 @@
 			height: 20px;
 		}
 
-		.play-button svg {
-			width: 50px;
-			height: 50px;
-		}
-
 		.cta-note {
 			font-size: 14px;
 		}
@@ -223,20 +197,11 @@
 			padding: 12px 20px;
 			font-size: 15px;
 		}
-
-		.play-button svg {
-			width: 40px;
-			height: 40px;
-		}
 	}
 
 	/* Performance optimization for mobile */
 	@media (prefers-reduced-motion: reduce) {
 		.cta-button {
-			transition: none;
-		}
-
-		.play-button {
 			transition: none;
 		}
 	}
