@@ -274,7 +274,68 @@
 
 			// Iniciar carousel
 			manageVideos();
-			// No empezar autoplay automáticamente, esperar a que el usuario dé play
+
+			// Intersection Observer para controlar reproducción automática
+			let userHasInteracted = false; // Para saber si el usuario ya controló manualmente
+
+			const observerOptions = {
+				root: null,
+				rootMargin: '-10% 0px -10% 0px',
+				threshold: 0.5
+			};
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						// Usuario llega a la sección
+						if (!userHasInteracted) {
+							// Activar reproducción y sonido solo si el usuario no ha intervenido
+							isPlaying = true;
+							isMuted = false;
+
+							// Actualizar botones
+							if (playIcon) playIcon.textContent = '⏸';
+							if (muteIcon) muteIcon.textContent = '🔊';
+
+							// Aplicar cambios y empezar autoplay
+							manageVideos();
+							startAutoplay();
+						}
+					} else {
+						// Usuario sale de la sección
+						// Pausar y mutear siempre, sin importar si el usuario interactuó
+						isPlaying = false;
+						isMuted = true;
+
+						// Actualizar botones
+						if (playIcon) playIcon.textContent = '▶';
+						if (muteIcon) muteIcon.textContent = '🔇';
+
+						// Aplicar cambios y detener autoplay
+						manageVideos();
+						stopAutoplay();
+					}
+				});
+			}, observerOptions);
+
+			// Observar la sección completa
+			const section = document.querySelector('.conocenos-30seg');
+			if (section) {
+				observer.observe(section);
+			}
+
+			// Marcar que el usuario ha interactuado cuando usa los controles
+			if (playPauseBtn) {
+				playPauseBtn.addEventListener('click', () => {
+					userHasInteracted = true;
+				});
+			}
+
+			if (muteUnmuteBtn) {
+				muteUnmuteBtn.addEventListener('click', () => {
+					userHasInteracted = true;
+				});
+			}
 		});
 	</script>
 </section>
