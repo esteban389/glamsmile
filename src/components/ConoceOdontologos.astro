@@ -29,20 +29,7 @@
 					<h3 class="doctor-name">Dr. Carlos Méndez</h3>
 					<p class="doctor-specialty">Carillas Cerámicas</p>
 					<p class="doctor-bio">
-						"Especialista en rehabilitación estética con más de 12 años de experiencia en carillas cerámicas y lentes dentales."
-					</p>
-					</div>
-			</article>
-
-			<article class="doctor-card">
-				<div class="doctor-photo">
-					<img src="/assets/girl.jpg" alt="Dra. Ana Lucia Torres" loading="lazy" width="300" height="400" />
-				</div>
-				<div class="doctor-info">
-					<h3 class="doctor-name">Dra. Ana Lucía Torres</h3>
-					<p class="doctor-specialty">Diseño Digital de Sonrisa</p>
-					<p class="doctor-bio">
-						"Pionera en tecnología digital aplicada a la odontología estética, especializada en planificación 3D y diseño predictivo."
+						"Especialista en carillas cerámicas y diseño digital de sonrisas. Mi objetivo es crear sonrisas perfectas que se vean completamente naturales."
 					</p>
 				</div>
 			</article>
@@ -52,58 +39,65 @@
 
 <style>
 	.team {
-		padding: clamp(60px, 8vw, 100px) 20px;
-		background: var(--why-bg);
+		background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+		padding: clamp(60px, 10vw, 120px) 0;
 		position: relative;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 clamp(20px, 4vw, 40px);
 	}
 
 	.team-header {
 		text-align: center;
-		max-width: 800px;
+		max-width: 700px;
 		margin: 0 auto 60px;
 	}
 
 	.team-header h2 {
-		font-size: clamp(32px, 4vw, 48px);
-		font-weight: var(--font-weight-bold);
+		font-size: clamp(32px, 5vw, 48px);
+		font-weight: 700;
 		margin: 0 0 20px;
-		color: var(--why-text);
+		color: #1a1a1a;
+		line-height: 1.2;
 	}
 
-	.team-header .intro {
-		font-size: clamp(16px, 1.5vw, 18px);
+	.intro {
+		font-size: clamp(18px, 2.2vw, 20px);
 		line-height: 1.6;
-		color: var(--why-muted);
+		color: #4a5568;
 		margin: 0;
 	}
 
 	.team-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 		gap: 40px;
-		max-width: 1200px;
+		max-width: 900px;
 		margin: 0 auto;
 	}
 
 	.doctor-card {
-		background: var(--why-surface);
-		border-radius: 16px;
+		background: white;
+		border-radius: 24px;
 		overflow: hidden;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+		border: 1px solid rgba(0, 0, 0, 0.06);
 		transition: all 0.3s ease;
-		border: 1px solid rgba(0, 0, 0, 0.05);
+		position: relative;
 	}
 
 	.doctor-card:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+		transform: translateY(-8px);
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
 	}
 
 	.doctor-photo {
-		width: 100%;
-		height: 300px;
-		overflow: hidden;
 		position: relative;
+		aspect-ratio: 3/4;
+		overflow: hidden;
 	}
 
 	.doctor-photo img {
@@ -117,138 +111,78 @@
 		transform: scale(1.05);
 	}
 
+	.doctor-photo::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 50%;
+		background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+		pointer-events: none;
+	}
+
 	.doctor-info {
-		padding: 30px;
+		padding: 32px 24px;
+		text-align: center;
 	}
 
 	.doctor-name {
 		font-size: 24px;
-		font-weight: var(--font-weight-bold);
+		font-weight: 700;
 		margin: 0 0 8px;
-		color: var(--why-text);
+		color: #1a1a1a;
 	}
 
 	.doctor-specialty {
 		font-size: 16px;
-		font-weight: var(--font-weight-medium);
-		color: var(--why-accent);
-		margin: 0 0 15px;
+		font-weight: 600;
+		color: #f3c98b;
+		margin: 0 0 16px;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
 	}
 
 	.doctor-bio {
-		font-size: 15px;
+		font-size: 16px;
 		line-height: 1.6;
-		color: var(--why-muted);
-		margin: 0 0 20px;
+		color: #4a5568;
+		margin: 0;
 		font-style: italic;
 	}
 
-	.doctor-social {
-		display: flex;
-		gap: 15px;
-	}
-
-	.social-link {
-		width: 40px;
-		height: 40px;
-		border-radius: 50%;
-		background: rgba(243, 201, 139, 0.1);
-		color: var(--why-accent);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-decoration: none;
-		transition: all 0.3s ease;
-		border: 1px solid rgba(243, 201, 139, 0.2);
-	}
-
-	.social-link:hover {
-		background: var(--why-accent);
-		color: var(--why-surface);
-		transform: translateY(-2px);
-	}
-
-	.social-link:focus {
-		outline: 2px solid var(--color-focus);
-		outline-offset: 2px;
-	}
-
-	/* Responsive adjustments */
+	/* Responsive Design */
 	@media (max-width: 768px) {
-		.team {
-			padding: 50px 20px;
-		}
-
-		.team-header {
-			margin-bottom: 40px;
-		}
-
 		.team-grid {
 			grid-template-columns: 1fr;
 			gap: 30px;
 		}
 
-		.doctor-photo {
-			height: 250px;
-		}
-
 		.doctor-info {
-			padding: 25px;
+			padding: 24px 20px;
 		}
 
 		.doctor-name {
 			font-size: 22px;
 		}
-
-		.doctor-specialty {
-			font-size: 15px;
-		}
-
-		.doctor-bio {
-			font-size: 14px;
-		}
 	}
 
-	@media (max-width: 480px) {
-		.doctor-photo {
-			height: 220px;
-		}
-
-		.doctor-info {
-			padding: 20px;
-		}
-
-		.doctor-name {
-			font-size: 20px;
-		}
-
-		.doctor-specialty {
-			font-size: 14px;
-		}
-
-		.doctor-bio {
-			font-size: 13px;
-			margin-bottom: 15px;
-		}
-
-		.social-link {
-			width: 35px;
-			height: 35px;
-		}
-	}
-
-	/* Performance optimization */
-	@media (prefers-reduced-motion: reduce) {
+	/* Animation */
+	@media (prefers-reduced-motion: no-preference) {
 		.doctor-card {
-			transition: none;
+			animation: fade-in-up 0.6s ease forwards;
+			opacity: 0;
+			transform: translateY(30px);
 		}
 
-		.doctor-photo img {
-			transition: none;
-		}
+		.doctor-card:nth-child(1) { animation-delay: 0.1s; }
+		.doctor-card:nth-child(2) { animation-delay: 0.2s; }
 
-		.social-link {
-			transition: none;
+		@keyframes fade-in-up {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
 		}
 	}
 </style>
