@@ -1,0 +1,424 @@
+<section class="testimonials" aria-labelledby="testimonials-title">
+	<div class="container">
+		<div class="testimonials-header">
+			<h2 id="testimonials-title">What our patients say</h2>
+		</div>
+
+		<div class="testimonials-slider">
+			<div class="testimonial-cards">
+				<article class="testimonial-card active">
+					<div class="testimonial-content">
+						<blockquote>
+							<p class="quote">
+								"I can't stop smiling, the change was incredible. The process was quick and painless. Thank you Glam Smile!"
+							</p>
+						</blockquote>
+						<div class="rating" aria-label="Rating: 5 out of 5 stars">
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+						</div>
+					</div>
+					<div class="patient-info">
+						<div class="patient-avatar">
+							<img src="/assets/girl.jpg" alt="Maria Garcia" loading="lazy" width="80" height="80" />
+						</div>
+						<div class="patient-details">
+							<h3 class="patient-name">Maria Garcia</h3>
+							<p class="patient-location">📍 Colombia</p>
+						</div>
+					</div>
+				</article>
+
+				<article class="testimonial-card">
+					<div class="testimonial-content">
+						<blockquote>
+							<p class="quote">
+								"The best investment I've ever made. My confidence has increased 100%. The team is professional and caring."
+							</p>
+						</blockquote>
+						<div class="rating" aria-label="Rating: 5 out of 5 stars">
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+						</div>
+					</div>
+					<div class="patient-info">
+						<div class="patient-avatar">
+							<img src="/assets/guy.jpg" alt="Carlos Rodriguez" loading="lazy" width="80" height="80" />
+						</div>
+						<div class="patient-details">
+							<h3 class="patient-name">Carlos Rodriguez</h3>
+							<p class="patient-location">📍 USA</p>
+						</div>
+					</div>
+				</article>
+
+				<article class="testimonial-card">
+					<div class="testimonial-content">
+						<blockquote>
+							<p class="quote">
+								"Amazing results in just 48 hours. I traveled from Europe and it was totally worth it. Highly recommended!"
+							</p>
+						</blockquote>
+						<div class="rating" aria-label="Rating: 5 out of 5 stars">
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+							<span class="star">⭐</span>
+						</div>
+					</div>
+					<div class="patient-info">
+						<div class="patient-avatar">
+							<img src="/assets/woman_smiling.jpg" alt="Ana Martinez" loading="lazy" width="80" height="80" />
+						</div>
+						<div class="patient-details">
+							<h3 class="patient-name">Ana Martinez</h3>
+							<p class="patient-location">📍 Spain</p>
+						</div>
+					</div>
+				</article>
+			</div>
+
+			<!-- Navigation -->
+			<div class="slider-nav">
+				<button class="nav-btn prev-btn" aria-label="Previous testimonial">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<polyline points="15,18 9,12 15,6"></polyline>
+					</svg>
+				</button>
+				<button class="nav-btn next-btn" aria-label="Next testimonial">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<polyline points="9,18 15,12 9,6"></polyline>
+					</svg>
+				</button>
+			</div>
+
+			<!-- Indicators -->
+			<div class="slider-indicators">
+				<button class="indicator active" aria-label="Go to testimonial 1" data-slide="0"></button>
+				<button class="indicator" aria-label="Go to testimonial 2" data-slide="1"></button>
+				<button class="indicator" aria-label="Go to testimonial 3" data-slide="2"></button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const cards = document.querySelectorAll('.testimonial-card');
+		const prevBtn = document.querySelector('.prev-btn');
+		const nextBtn = document.querySelector('.next-btn');
+		const indicators = document.querySelectorAll('.indicator');
+		
+		let currentSlide = 0;
+		let autoplayTimer;
+		
+		// Initialize
+		function init() {
+			updateSlider();
+			setupEventListeners();
+			startAutoplay();
+		}
+		
+		// Update slider
+		function updateSlider() {
+			cards.forEach((card, index) => {
+				card.classList.toggle('active', index === currentSlide);
+			});
+			
+			indicators.forEach((indicator, index) => {
+				indicator.classList.toggle('active', index === currentSlide);
+			});
+		}
+		
+		// Navigation
+		function goToSlide(slideIndex) {
+			currentSlide = slideIndex;
+			updateSlider();
+			resetAutoplay();
+		}
+		
+		function nextSlide() {
+			currentSlide = (currentSlide + 1) % cards.length;
+			updateSlider();
+			resetAutoplay();
+		}
+		
+		function prevSlide() {
+			currentSlide = (currentSlide - 1 + cards.length) % cards.length;
+			updateSlider();
+			resetAutoplay();
+		}
+		
+		// Autoplay
+		function startAutoplay() {
+			autoplayTimer = setInterval(nextSlide, 5000);
+		}
+		
+		function resetAutoplay() {
+			clearInterval(autoplayTimer);
+			startAutoplay();
+		}
+		
+		function pauseAutoplay() {
+			clearInterval(autoplayTimer);
+		}
+		
+		// Event listeners
+		function setupEventListeners() {
+			nextBtn.addEventListener('click', nextSlide);
+			prevBtn.addEventListener('click', prevSlide);
+			
+			indicators.forEach((indicator, index) => {
+				indicator.addEventListener('click', () => goToSlide(index));
+			});
+			
+			// Pause on hover
+			const slider = document.querySelector('.testimonials-slider');
+			slider.addEventListener('mouseenter', pauseAutoplay);
+			slider.addEventListener('mouseleave', startAutoplay);
+		}
+		
+		// Initialize
+		init();
+	});
+</script>
+
+<style>
+	.testimonials {
+		background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+		color: #ffffff;
+		padding: clamp(60px, 10vw, 120px) 0;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 clamp(20px, 4vw, 40px);
+	}
+
+	.testimonials-header {
+		text-align: center;
+		margin-bottom: 60px;
+	}
+
+	.testimonials-header h2 {
+		font-size: clamp(32px, 5vw, 48px);
+		font-weight: 700;
+		margin: 0;
+		background: linear-gradient(135deg, #ffffff 0%, #f3c98b 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		line-height: 1.2;
+	}
+
+	/* Slider */
+	.testimonials-slider {
+		position: relative;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.testimonial-cards {
+		position: relative;
+		min-height: 300px;
+	}
+
+	.testimonial-card {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 24px;
+		padding: 40px 32px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(10px);
+		opacity: 0;
+		transform: translateY(20px);
+		transition: all 0.6s ease;
+		pointer-events: none;
+	}
+
+	.testimonial-card.active {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+
+	.testimonial-content {
+		margin-bottom: 32px;
+	}
+
+	.quote {
+		font-size: clamp(18px, 2.5vw, 22px);
+		line-height: 1.6;
+		margin: 0 0 24px;
+		font-style: italic;
+		color: rgba(255, 255, 255, 0.9);
+	}
+
+	.rating {
+		display: flex;
+		gap: 4px;
+		justify-content: center;
+	}
+
+	.star {
+		font-size: 20px;
+	}
+
+	.patient-info {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.patient-avatar {
+		flex-shrink: 0;
+	}
+
+	.patient-avatar img {
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 2px solid rgba(243, 201, 139, 0.3);
+	}
+
+	.patient-name {
+		font-size: 18px;
+		font-weight: 600;
+		margin: 0 0 4px;
+		color: #ffffff;
+	}
+
+	.patient-location {
+		font-size: 14px;
+		color: rgba(255, 255, 255, 0.7);
+		margin: 0;
+	}
+
+	/* Navigation */
+	.slider-nav {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		padding: 0 -60px;
+		pointer-events: none;
+	}
+
+	.nav-btn {
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: rgba(0, 0, 0, 0.7);
+		border: none;
+		color: white;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		pointer-events: auto;
+		backdrop-filter: blur(10px);
+	}
+
+	.nav-btn:hover {
+		background: rgba(0, 0, 0, 0.9);
+		transform: scale(1.1);
+	}
+
+	.nav-btn:focus-visible {
+		outline: 2px solid #f3c98b;
+		outline-offset: 2px;
+	}
+
+	/* Indicators */
+	.slider-indicators {
+		display: flex;
+		justify-content: center;
+		gap: 12px;
+		margin-top: 40px;
+	}
+
+	.indicator {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		border: none;
+		background: rgba(255, 255, 255, 0.3);
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.indicator.active {
+		background: #f3c98b;
+		transform: scale(1.2);
+	}
+
+	.indicator:hover {
+		background: rgba(255, 255, 255, 0.6);
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.testimonial-card {
+			padding: 32px 24px;
+		}
+
+		.slider-nav {
+			padding: 0 -40px;
+		}
+
+		.nav-btn {
+			width: 40px;
+			height: 40px;
+		}
+
+		.patient-avatar img {
+			width: 50px;
+			height: 50px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.testimonial-card {
+			padding: 24px 20px;
+		}
+
+		.patient-info {
+			flex-direction: column;
+			text-align: center;
+			gap: 12px;
+		}
+	}
+
+	/* Reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		.testimonial-card {
+			transition: opacity 0.3s ease;
+			transform: none;
+		}
+
+		.testimonial-card.active {
+			transform: none;
+		}
+
+		.nav-btn:hover {
+			transform: none;
+		}
+	}
+</style>

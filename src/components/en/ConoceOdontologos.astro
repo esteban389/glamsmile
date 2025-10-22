@@ -1,0 +1,188 @@
+<section class="team" aria-labelledby="team-title">
+	<div class="container">
+		<div class="team-header">
+			<h2 id="team-title">Meet our specialists</h2>
+			<p class="intro">
+				Behind every transformed smile there is a team of Aesthetic Dentistry specialists with years of experience, international training and passion for what they do.
+			</p>
+		</div>
+
+		<div class="team-grid">
+			<article class="doctor-card">
+				<div class="doctor-photo">
+					<img src="/assets/girl.jpg" alt="Dr. Sofia Ramirez" loading="lazy" width="300" height="400" />
+				</div>
+				<div class="doctor-info">
+					<h3 class="doctor-name">Dr. Sofia Ramirez</h3>
+					<p class="doctor-specialty">Aesthetic Dentistry</p>
+					<p class="doctor-bio">
+						"More than 10 years of experience helping patients regain their confidence through natural and harmonious smiles."
+					</p>
+				</div>
+			</article>
+
+			<article class="doctor-card">
+				<div class="doctor-photo">
+					<img src="/assets/guy.jpg" alt="Dr. Carlos Mendez" loading="lazy" width="300" height="400" />
+				</div>
+				<div class="doctor-info">
+					<h3 class="doctor-name">Dr. Carlos Mendez</h3>
+					<p class="doctor-specialty">Ceramic Veneers</p>
+					<p class="doctor-bio">
+						"Specialist in ceramic veneers and digital smile design. My goal is to create perfect smiles that look completely natural."
+					</p>
+				</div>
+			</article>
+		</div>
+	</div>
+</section>
+
+<style>
+	.team {
+		background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+		padding: clamp(60px, 10vw, 120px) 0;
+		position: relative;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 clamp(20px, 4vw, 40px);
+	}
+
+	.team-header {
+		text-align: center;
+		max-width: 700px;
+		margin: 0 auto 60px;
+	}
+
+	.team-header h2 {
+		font-size: clamp(32px, 5vw, 48px);
+		font-weight: 700;
+		margin: 0 0 20px;
+		color: #1a1a1a;
+		line-height: 1.2;
+	}
+
+	.intro {
+		font-size: clamp(18px, 2.2vw, 20px);
+		line-height: 1.6;
+		color: #4a5568;
+		margin: 0;
+	}
+
+	.team-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 40px;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.doctor-card {
+		background: white;
+		border-radius: 24px;
+		overflow: hidden;
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		transition: all 0.3s ease;
+		position: relative;
+	}
+
+	.doctor-card:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+	}
+
+	.doctor-photo {
+		position: relative;
+		aspect-ratio: 3/4;
+		overflow: hidden;
+	}
+
+	.doctor-photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.doctor-card:hover .doctor-photo img {
+		transform: scale(1.05);
+	}
+
+	.doctor-photo::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 50%;
+		background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+		pointer-events: none;
+	}
+
+	.doctor-info {
+		padding: 32px 24px;
+		text-align: center;
+	}
+
+	.doctor-name {
+		font-size: 24px;
+		font-weight: 700;
+		margin: 0 0 8px;
+		color: #1a1a1a;
+	}
+
+	.doctor-specialty {
+		font-size: 16px;
+		font-weight: 600;
+		color: #f3c98b;
+		margin: 0 0 16px;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.doctor-bio {
+		font-size: 16px;
+		line-height: 1.6;
+		color: #4a5568;
+		margin: 0;
+		font-style: italic;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.team-grid {
+			grid-template-columns: 1fr;
+			gap: 30px;
+		}
+
+		.doctor-info {
+			padding: 24px 20px;
+		}
+
+		.doctor-name {
+			font-size: 22px;
+		}
+	}
+
+	/* Animation */
+	@media (prefers-reduced-motion: no-preference) {
+		.doctor-card {
+			animation: fade-in-up 0.6s ease forwards;
+			opacity: 0;
+			transform: translateY(30px);
+		}
+
+		.doctor-card:nth-child(1) { animation-delay: 0.1s; }
+		.doctor-card:nth-child(2) { animation-delay: 0.2s; }
+
+		@keyframes fade-in-up {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	}
+</style>

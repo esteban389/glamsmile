@@ -1,0 +1,274 @@
+<section class="why" aria-labelledby="why-title">
+	<div class="container">
+		<div class="content-wrapper">
+			<div class="hero-content">
+				<div class="badge">
+					<span class="badge-text">+5000 Satisfied Patients</span>
+				</div>
+				<h2 id="why-title">The smile you've always dreamed of</h2>
+				<p class="subtitle">
+					Aesthetic dentistry specialists who combine science, art and technology 
+					to transform your smile and <strong>restore your confidence</strong>.
+				</p>
+				
+				<div class="features-grid">
+					<div class="feature">
+						<div class="feature-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M9 12l2 2 4-4"/>
+								<circle cx="12" cy="12" r="9"/>
+							</svg>
+						</div>
+						<div class="feature-content">
+							<h3>100% Personalized</h3>
+							<p>Each treatment designed specifically for you</p>
+						</div>
+					</div>
+					
+					<div class="feature">
+						<div class="feature-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+							</svg>
+						</div>
+						<div class="feature-content">
+							<h3>Advanced Technology</h3>
+							<p>High-quality materials and innovative techniques</p>
+						</div>
+					</div>
+					
+					<div class="feature">
+						<div class="feature-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M20 6L9 17l-5-5"/>
+							</svg>
+						</div>
+						<div class="feature-content">
+							<h3>Lasting Results</h3>
+							<p>Natural smiles that endure over time</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="media">
+				<picture>
+					<source srcset="/assets/doctors.avif" type="image/avif" />
+					<source srcset="/assets/doctors.webp" type="image/webp" />
+					<img src="/assets/doctors.jpg" alt="Glam Smile Team: aesthetic dentistry specialists" loading="lazy" decoding="async" width="900" height="1200" />
+				</picture>
+				<div class="media-overlay"></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.why {
+		position: relative;
+		background: linear-gradient(135deg, #fafafa 0%, #f8f9fa 100%);
+		color: #1a1a1a;
+		overflow: hidden;
+		padding: clamp(60px, 10vw, 120px) 0;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 clamp(20px, 4vw, 40px);
+	}
+
+	.content-wrapper {
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: clamp(40px, 6vw, 80px);
+		align-items: center;
+	}
+
+	/* Hero Content */
+	.hero-content {
+		position: relative;
+		z-index: 2;
+	}
+
+	.badge {
+		display: inline-flex;
+		align-items: center;
+		background: linear-gradient(135deg, #f3c98b 0%, #e6b366 100%);
+		color: #2c1810;
+		padding: 8px 16px;
+		border-radius: 50px;
+		font-size: 14px;
+		font-weight: 600;
+		margin-bottom: 20px;
+		box-shadow: 0 4px 12px rgba(243, 201, 139, 0.3);
+	}
+
+	.badge-text {
+		position: relative;
+	}
+
+	.badge-text::before {
+		content: '✓';
+		margin-right: 8px;
+		font-weight: bold;
+	}
+
+	h2 {
+		font-size: clamp(32px, 5vw, 48px);
+		font-weight: 700;
+		line-height: 1.2;
+		margin: 0 0 20px;
+		color: #1a1a1a;
+		letter-spacing: -0.02em;
+	}
+
+	.subtitle {
+		font-size: clamp(18px, 2.5vw, 22px);
+		line-height: 1.6;
+		color: #4a5568;
+		margin: 0 0 40px;
+		font-weight: 400;
+	}
+
+	/* Features Grid */
+	.features-grid {
+		display: grid;
+		gap: 24px;
+	}
+
+	.feature {
+		display: flex;
+		align-items: flex-start;
+		gap: 16px;
+		padding: 20px;
+		background: white;
+		border-radius: 16px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		transition: all 0.3s ease;
+	}
+
+	.feature:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+	}
+
+	.feature-icon {
+		flex-shrink: 0;
+		width: 48px;
+		height: 48px;
+		background: linear-gradient(135deg, #f3c98b 0%, #e6b366 100%);
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #2c1810;
+	}
+
+	.feature-content h3 {
+		font-size: 18px;
+		font-weight: 600;
+		margin: 0 0 8px;
+		color: #1a1a1a;
+	}
+
+	.feature-content p {
+		font-size: 15px;
+		color: #6b7280;
+		margin: 0;
+		line-height: 1.5;
+	}
+
+	/* Media Section */
+	.media {
+		position: relative;
+		border-radius: 24px;
+		overflow: hidden;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+		transform: translateY(0);
+		transition: transform 0.6s ease;
+	}
+
+	.media:hover {
+		transform: translateY(-8px);
+	}
+
+	.media img {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	.media-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			135deg,
+			rgba(243, 201, 139, 0.1) 0%,
+			rgba(243, 201, 139, 0.05) 50%,
+			transparent 100%
+		);
+		pointer-events: none;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 1024px) {
+		.content-wrapper {
+			grid-template-columns: 1fr;
+			gap: 50px;
+		}
+
+		.hero-content {
+			order: 2;
+		}
+
+		.media {
+			order: 1;
+		}
+
+		.features-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.why {
+			padding: clamp(40px, 8vw, 80px) 0;
+		}
+
+		.features-grid {
+			gap: 16px;
+		}
+
+		.feature {
+			padding: 16px;
+		}
+
+		.feature-icon {
+			width: 40px;
+			height: 40px;
+		}
+	}
+
+	/* Animation */
+	@media (prefers-reduced-motion: no-preference) {
+		.feature {
+			animation: fade-in-up 0.6s ease forwards;
+			opacity: 0;
+			transform: translateY(20px);
+		}
+
+		.feature:nth-child(1) { animation-delay: 0.1s; }
+		.feature:nth-child(2) { animation-delay: 0.2s; }
+		.feature:nth-child(3) { animation-delay: 0.3s; }
+
+		@keyframes fade-in-up {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	}
+</style>

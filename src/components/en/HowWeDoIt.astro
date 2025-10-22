@@ -1,0 +1,219 @@
+<section class="how" aria-labelledby="how-title">
+	<div class="container">
+		<h2 id="how-title">How do we do it?</h2>
+		<p class="intro">
+			At Glam Smile we believe that a successful treatment begins with a clear and reliable experience. 
+			That's why we've designed a simple, fast and personalized process that accompanies you at every stage:
+		</p>
+		
+		<div class="steps">
+			<div class="step">
+				<div class="step-icon">
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="11" cy="11" r="8"/>
+						<path d="M21 21l-4.35-4.35"/>
+					</svg>
+				</div>
+				<h3>Professional evaluation</h3>
+				<p>We review your case online or in person, with a detailed diagnosis to understand your needs and expectations.</p>
+			</div>
+			
+			<div class="step">
+				<div class="step-icon">
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+						<line x1="16" y1="2" x2="16" y2="6"/>
+						<line x1="8" y1="2" x2="8" y2="6"/>
+						<line x1="3" y1="10" x2="21" y2="10"/>
+					</svg>
+				</div>
+				<h3>Budget and schedule</h3>
+				<p>You receive a clear and personalized proposal, and we schedule your treatment on the date that best suits you.</p>
+			</div>
+			
+			<div class="step">
+				<div class="step-icon">
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+						<circle cx="12" cy="10" r="3"/>
+					</svg>
+				</div>
+				<h3>Visit our clinic in Colombia</h3>
+				<p>We welcome you to our facilities, with warm attention and an environment designed for your comfort.</p>
+			</div>
+			
+			<div class="step">
+				<div class="step-icon">
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+					</svg>
+				</div>
+				<h3>Your new smile in 24/48 hours</h3>
+				<p>In one or two days you will get a perfect, natural and lasting smile thanks to our technology and high-quality materials.</p>
+			</div>
+			
+			<div class="step">
+				<div class="step-icon">
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+					</svg>
+				</div>
+				<h3>Virtual support</h3>
+				<p>We offer follow-up and support through Google Meet or WhatsApp to guarantee your peace of mind and the best results.</p>
+			</div>
+		</div>
+		
+		<div class="tagline">
+			<p><strong>We accompany you at every stage, from diagnosis to your new smile.</strong></p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.how {
+		background: var(--why-surface);
+		color: var(--why-text);
+		padding: clamp(48px, 8vw, 120px) 0;
+		position: relative;
+		overflow: clip;
+	}
+
+	.how::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--why-accent) 60%, transparent), transparent);
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 clamp(16px, 3vw, 24px);
+		text-align: center;
+	}
+
+	.how h2 {
+		margin: 0 0 16px;
+		font-size: clamp(28px, 4vw, 42px);
+		font-weight: var(--font-weight-semibold);
+	}
+
+	.intro {
+		max-width: 600px;
+		margin: 0 auto 48px;
+		color: var(--why-muted);
+		line-height: 1.6;
+		font-size: clamp(16px, 1.8vw, 18px);
+	}
+
+	.steps {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 32px;
+		margin-bottom: 48px;
+		position: relative;
+	}
+
+	.step {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.step-icon {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		background: var(--why-surface);
+		border: 2px solid color-mix(in oklab, var(--why-accent) 40%, transparent);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 16px;
+		box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+		position: relative;
+		z-index: 2;
+		color: var(--why-accent);
+	}
+
+	.step-icon::before {
+		content: '';
+		position: absolute;
+		inset: -2px;
+		border-radius: 50%;
+		background: linear-gradient(45deg, var(--why-accent), transparent, var(--why-accent));
+		z-index: -1;
+		opacity: 0.3;
+	}
+
+	.step h3 {
+		margin: 0 0 8px;
+		font-size: clamp(16px, 2vw, 18px);
+		font-weight: var(--font-weight-semibold);
+		color: var(--why-text);
+	}
+
+	.step p {
+		margin: 0;
+		color: var(--why-muted);
+		line-height: 1.5;
+		font-size: clamp(14px, 1.6vw, 16px);
+		max-width: 280px;
+	}
+
+	/* Connecting curve */
+	.steps::before {
+		content: '';
+		position: absolute;
+		top: 40px;
+		left: 10%;
+		right: 10%;
+		height: 2px;
+		background: linear-gradient(90deg, 
+			transparent 0%, 
+			color-mix(in oklab, var(--why-accent) 30%, transparent) 20%, 
+			color-mix(in oklab, var(--why-accent) 60%, transparent) 50%, 
+			color-mix(in oklab, var(--why-accent) 30%, transparent) 80%, 
+			transparent 100%
+		);
+		z-index: 1;
+		border-radius: 1px;
+	}
+
+	.tagline {
+		background: color-mix(in oklab, var(--why-accent) 8%, var(--why-surface) 92%);
+		border: 1px solid color-mix(in oklab, var(--why-accent) 20%, transparent);
+		border-radius: 16px;
+		padding: 20px 24px;
+		max-width: 500px;
+		margin: 0 auto;
+	}
+
+	.tagline p {
+		margin: 0;
+		font-size: clamp(16px, 1.8vw, 18px);
+		color: var(--why-text);
+		line-height: 1.5;
+	}
+
+	@media (max-width: 768px) {
+		.steps {
+			grid-template-columns: 1fr;
+			gap: 24px;
+		}
+		
+		.steps::before {
+			display: none;
+		}
+		
+		.step-icon {
+			width: 70px;
+			height: 70px;
+		}
+	}
+</style>

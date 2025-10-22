@@ -1,0 +1,201 @@
+---
+
+---
+
+<section
+	class="hero"
+	aria-label="Premium, human and close dental transformation"
+>
+	<div class="content">
+		<div class="inner">
+			<h1 class="headline">
+				Creating smiles that inspire <strong>confidence</strong> and beauty
+			</h1>
+			<p class="subhead">
+				Ceramic veneers and high-quality aesthetic resins. Minimally
+				invasive technique, immediate and natural results.
+			</p>
+			<div class="ctas">
+				<a class="btn btn-primary" href="#cta-section">Book your appointment</a>
+				<a class="btn btn-secondary" href="#before-after">See results</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+
+	.hero {
+		position: relative;
+		isolation: isolate;
+		background: radial-gradient(
+			1200px 60% at 70% 40%,
+			var(--color-surface),
+			var(--color-bg)
+		);
+		color: var(--color-text);
+		display: block;
+	}
+
+	/* Background image lives on .content with fixed attachment */
+	.content {
+		position: relative;
+		min-height: 100vh;
+		padding: clamp(24px, 3vw, 48px);
+		/* Use modern image-set with fallbacks */
+		background-image: image-set(
+			url('/assets/man_smile_2.avif') type('image/avif') 1x,
+			url('/assets/man_smile_2.webp') type('image/webp') 1x,
+			url('/assets/man_smile_2.png') type('image/png') 1x
+		);
+		background-attachment: fixed;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		overflow: clip;
+	}
+
+	/* Vignette/overlay to preserve legibility */
+	.content::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(
+				60% 50% at 65% 45%,
+				rgba(0, 0, 0, 0) 0%,
+				rgba(0, 0, 0, 0.25) 55%,
+				rgba(0, 0, 0, 0.6) 100%
+			),
+			linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.65) 100%);
+		mix-blend-mode: multiply;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.inner {
+		position: absolute;
+		top: 50%;
+		transform: translate(0, -50%);
+		z-index: 1;
+		max-width: var(--max-content-width);
+		margin: 0 auto;
+	}
+
+	.headline {
+		font-family: var(--font-sans);
+		font-weight: var(--font-weight-semibold);
+		line-height: 1.05;
+		letter-spacing: -0.01em;
+		font-size: clamp(32px, 5.5vw, 64px);
+		margin: 0 0 16px;
+		opacity: 0;
+		transform: translateY(12px);
+		animation: headline-reveal 900ms 120ms both cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.headline strong {
+		font-weight: var(--font-weight-bold);
+		color: var(--color-accent);
+	}
+
+	.subhead {
+		font-family: var(--font-sans);
+		font-weight: var(--font-weight-regular);
+		color: var(--color-muted);
+		font-size: clamp(16px, 1.8vw, 20px);
+		line-height: 1.5;
+		max-width: 52ch;
+		margin: 0 0 24px;
+	}
+
+	.ctas {
+		display: flex;
+		gap: 12px;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-family: var(--font-sans);
+		font-weight: var(--font-weight-medium);
+		font-size: 16px;
+		line-height: 1;
+		padding: 12px 18px;
+		border-radius: 999px;
+		text-decoration: none;
+		border: 1px solid transparent;
+		transition:
+			transform 200ms ease,
+			background-color 200ms ease,
+			color 200ms ease,
+			box-shadow 200ms ease,
+			border-color 200ms ease;
+		outline: none;
+	}
+
+	.btn:focus-visible {
+		box-shadow: 0 0 0 3px
+			color-mix(in oklab, var(--color-focus) 60%, transparent);
+		border-color: var(--color-focus);
+	}
+
+	.btn-primary {
+		background: var(--color-accent);
+		color: var(--color-accent-contrast);
+	}
+
+	.btn-primary:hover {
+		transform: translateY(-1px);
+		filter: brightness(0.98);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		border-color: color-mix(in oklab, var(--color-text) 30%, transparent);
+		color: var(--color-text);
+	}
+
+	.btn-secondary:hover {
+		transform: translateY(-1px);
+		background: color-mix(in oklab, var(--color-surface) 40%, transparent);
+	}
+
+	@keyframes headline-reveal {
+		from {
+			opacity: 0;
+			transform: translateY(12px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 1024px) {
+		.inner { padding-right: 12px; padding-left: 12px; }
+	}
+
+	@media (max-width: 768px) {
+		.content {
+			min-height: 78vh;
+			/* Improve mobile perf: disable fixed background on small screens */
+			background-attachment: scroll;
+		}
+		.subhead {
+			max-width: 60ch;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.headline {
+			animation: none;
+			opacity: 1;
+			transform: none;
+		}
+		.btn {
+			transition: none;
+		}
+	}
+</style>

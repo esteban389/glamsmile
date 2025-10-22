@@ -1,0 +1,238 @@
+<section class="location-contact" aria-labelledby="contact-title">
+	<div class="container">
+		<div class="content-section">
+			<h2 id="contact-title">We are here for you</h2>
+			<p class="intro">
+				Visit us at our clinic or book your appointment from anywhere in the world.
+				Our team is ready to accompany you in the process of achieving the smile you always dreamed of.
+			</p>
+
+			<div class="contact-info">
+				<div class="contact-item">
+					<span class="icon" aria-hidden="true">📍</span>
+					<div>
+						<h3>Address</h3>
+						<p>Calle 123 #45-67, Bogotá, Colombia</p>
+					</div>
+				</div>
+
+				<div class="contact-item">
+					<span class="icon" aria-hidden="true">📞</span>
+					<div>
+						<h3>Phone</h3>
+						<p>+57 300 000 0000</p>
+					</div>
+				</div>
+
+				<div class="contact-item">
+					<span class="icon" aria-hidden="true">📧</span>
+					<div>
+						<h3>Email</h3>
+						<p>info@glamsmile.co</p>
+					</div>
+				</div>
+
+				<div class="contact-item">
+					<span class="icon" aria-hidden="true">🕒</span>
+					<div>
+						<h3>Hours</h3>
+						<p>Monday to Friday: 8:00 AM - 6:00 PM<br>Saturday: 8:00 AM - 2:00 PM</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="cta-buttons">
+				<a href="https://instagram.com/glam_smile" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<rect x="2" y="2" width="20" height="20" rx="4"/>
+						<circle cx="12" cy="12" r="4"/>
+						<circle cx="18" cy="6" r="1" fill="currentColor"/>
+					</svg>
+					Book via Instagram
+				</a>
+				<a href="https://wa.me/573000000000" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+					</svg>
+					WhatsApp
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.location-contact {
+		background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+		color: #ffffff;
+		padding: clamp(60px, 10vw, 120px) 0;
+		position: relative;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 clamp(20px, 4vw, 40px);
+	}
+
+	.content-section {
+		max-width: 800px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	h2 {
+		font-size: clamp(32px, 5vw, 48px);
+		font-weight: 700;
+		margin: 0 0 20px;
+		background: linear-gradient(135deg, #ffffff 0%, #f3c98b 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		line-height: 1.2;
+	}
+
+	.intro {
+		font-size: clamp(18px, 2.2vw, 20px);
+		line-height: 1.6;
+		color: rgba(255, 255, 255, 0.8);
+		margin: 0 0 50px;
+	}
+
+	.contact-info {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 32px;
+		margin-bottom: 50px;
+	}
+
+	.contact-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 16px;
+		padding: 24px;
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 16px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(10px);
+		transition: all 0.3s ease;
+		text-align: left;
+	}
+
+	.contact-item:hover {
+		background: rgba(255, 255, 255, 0.08);
+		border-color: rgba(243, 201, 139, 0.3);
+		transform: translateY(-4px);
+	}
+
+	.contact-item .icon {
+		font-size: 24px;
+		flex-shrink: 0;
+		margin-top: 4px;
+	}
+
+	.contact-item h3 {
+		font-size: 18px;
+		font-weight: 600;
+		margin: 0 0 8px;
+		color: #f3c98b;
+	}
+
+	.contact-item p {
+		font-size: 16px;
+		line-height: 1.5;
+		color: rgba(255, 255, 255, 0.8);
+		margin: 0;
+	}
+
+	.cta-buttons {
+		display: flex;
+		gap: 16px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		padding: 16px 24px;
+		border-radius: 50px;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 16px;
+		transition: all 0.3s ease;
+		border: 2px solid transparent;
+	}
+
+	.btn-primary {
+		background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 12px 40px rgba(131, 58, 180, 0.4);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		border-color: rgba(255, 255, 255, 0.3);
+		color: white;
+	}
+
+	.btn-secondary:hover {
+		background: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255, 255, 255, 0.5);
+		transform: translateY(-2px);
+	}
+
+	.btn:focus-visible {
+		outline: 2px solid #f3c98b;
+		outline-offset: 2px;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.contact-info {
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
+
+		.contact-item {
+			padding: 20px;
+		}
+
+		.cta-buttons {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.btn {
+			width: 100%;
+			max-width: 300px;
+			justify-content: center;
+		}
+	}
+
+	/* Animation */
+	@media (prefers-reduced-motion: no-preference) {
+		.contact-item {
+			animation: fade-in-up 0.6s ease forwards;
+			opacity: 0;
+			transform: translateY(30px);
+		}
+
+		.contact-item:nth-child(1) { animation-delay: 0.1s; }
+		.contact-item:nth-child(2) { animation-delay: 0.2s; }
+		.contact-item:nth-child(3) { animation-delay: 0.3s; }
+		.contact-item:nth-child(4) { animation-delay: 0.4s; }
+
+		@keyframes fade-in-up {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	}
+</style>

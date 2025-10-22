@@ -1,0 +1,287 @@
+---
+// Floating Instagram Contact Button
+---
+
+<div class="floating-contact">
+	<a
+		href="https://instagram.com/glam_smile"
+		target="_blank"
+		rel="noopener noreferrer"
+		class="contact-button"
+		aria-label="Book appointment via Instagram (opens in new tab)"
+	>
+		<div class="button-content">
+			<svg
+				class="instagram-icon"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+			>
+				<rect
+					x="2"
+					y="2"
+					width="20"
+					height="20"
+					rx="4"
+					stroke="currentColor"
+					stroke-width="2"></rect>
+				<circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"
+				></circle>
+				<circle cx="18" cy="6" r="1" fill="currentColor"></circle>
+			</svg>
+			<span class="button-text">Contact us on Instagram</span>
+		</div>
+		<div class="pulse-ring"></div>
+	</a>
+</div>
+
+<style>
+	.floating-contact {
+		position: fixed;
+		bottom: 48px;
+		right: 48px;
+		z-index: 1000;
+		pointer-events: none;
+		transition: all 0.3s ease;
+	}
+
+	/* Heartbeat mode - bigger with glow and ping animation */
+	.floating-contact.heartbeat-mode {
+		transform: scale(1.15);
+	}
+
+	.floating-contact.heartbeat-mode .contact-button {
+		box-shadow:
+			0 12px 40px rgba(131, 58, 180, 0.6),
+			0 8px 25px rgba(253, 29, 29, 0.4),
+			0 4px 15px rgba(252, 176, 69, 0.3),
+			0 0 0 1px rgba(255, 255, 255, 0.2);
+		animation: heartbeat-ping 3s ease-in-out infinite;
+	}
+
+	.floating-contact.heartbeat-mode .pulse-ring {
+		animation:
+			heartbeat-glow 3s ease-in-out infinite,
+			pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	}
+
+	@keyframes heartbeat-ping {
+		0%,
+		100% {
+			transform: scale(1);
+			box-shadow:
+				0 12px 40px rgba(131, 58, 180, 0.6),
+				0 8px 25px rgba(253, 29, 29, 0.4),
+				0 4px 15px rgba(252, 176, 69, 0.3),
+				0 0 0 1px rgba(255, 255, 255, 0.2);
+		}
+
+		/* First strong beat */
+		10% {
+			transform: scale(1.25);
+			box-shadow:
+				0 24px 70px rgba(131, 58, 180, 0.9),
+				0 18px 45px rgba(253, 29, 29, 0.7),
+				0 10px 30px rgba(252, 176, 69, 0.5),
+				0 0 0 2px rgba(255, 255, 255, 0.4);
+		}
+
+		/* Recoil slightly */
+		20% {
+			transform: scale(0.9);
+			box-shadow:
+				0 10px 30px rgba(131, 58, 180, 0.5),
+				0 6px 20px rgba(253, 29, 29, 0.3),
+				0 4px 15px rgba(252, 176, 69, 0.2),
+				0 0 0 1px rgba(255, 255, 255, 0.2);
+		}
+
+		/* Second lighter beat (like a real double-pulse heartbeat) */
+		30% {
+			transform: scale(1.15);
+			box-shadow:
+				0 18px 55px rgba(131, 58, 180, 0.8),
+				0 12px 35px rgba(253, 29, 29, 0.6),
+				0 6px 20px rgba(252, 176, 69, 0.4),
+				0 0 0 1.5px rgba(255, 255, 255, 0.3);
+		}
+
+		40% {
+			transform: scale(0.95);
+		}
+	}
+
+	@keyframes heartbeat-glow {
+		0%,
+		70%,
+		100% {
+			border-color: rgba(131, 58, 180, 0.6);
+			border-width: 2px;
+		}
+		10% {
+			border-color: rgba(131, 58, 180, 1);
+			border-width: 4px;
+		}
+		20% {
+			border-color: rgba(131, 58, 180, 0.8);
+			border-width: 3px;
+		}
+	}
+
+	.contact-button {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+		color: white;
+		text-decoration: none;
+		padding: 16px 24px;
+		border-radius: 50px;
+		font-weight: 600;
+		font-size: 16px;
+		box-shadow:
+			0 8px 32px rgba(131, 58, 180, 0.4),
+			0 4px 16px rgba(0, 0, 0, 0.3);
+		transition: all 0.3s ease;
+		pointer-events: auto;
+		overflow: hidden;
+		border: none;
+		outline: none;
+	}
+
+	.contact-button::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(255, 255, 255, 0.3),
+			transparent
+		);
+		transition: left 0.6s ease;
+	}
+
+	.contact-button:hover::before {
+		left: 100%;
+	}
+
+	.contact-button:hover {
+		transform: translateY(-2px) scale(1.05);
+		box-shadow:
+			0 12px 40px rgba(131, 58, 180, 0.6),
+			0 8px 24px rgba(253, 29, 29, 0.3);
+	}
+
+	.contact-button:focus-visible {
+		outline: 3px solid rgba(131, 58, 180, 0.5);
+		outline-offset: 2px;
+	}
+
+	.button-content {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		position: relative;
+		z-index: 2;
+	}
+
+	.instagram-icon {
+		flex-shrink: 0;
+		width: 24px;
+		height: 24px;
+	}
+
+	.button-text {
+		font-weight: 600;
+		white-space: nowrap;
+	}
+
+	.pulse-ring {
+		position: absolute;
+		top: -4px;
+		left: -4px;
+		right: -4px;
+		bottom: -4px;
+		border: 2px solid rgba(131, 58, 180, 0.6);
+		border-radius: 50px;
+		animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+		pointer-events: none;
+	}
+
+	@keyframes pulse {
+		0% {
+			transform: scale(1);
+			opacity: 1;
+		}
+		100% {
+			transform: scale(1.1);
+			opacity: 0;
+		}
+	}
+
+	/* Mobile Styles */
+	@media (max-width: 768px) {
+		.floating-contact {
+			bottom: 20px;
+			right: 20px;
+		}
+
+		.contact-button {
+			width: 56px;
+			height: 56px;
+			padding: 0;
+			border-radius: 50%;
+			justify-content: center;
+		}
+
+		.button-text {
+			display: none;
+		}
+
+		.instagram-icon {
+			width: 28px;
+			height: 28px;
+		}
+	}
+
+	/* Ultra small screens */
+	@media (max-width: 480px) {
+		.floating-contact {
+			bottom: 16px;
+			right: 16px;
+		}
+
+		.contact-button {
+			width: 48px;
+			height: 48px;
+		}
+
+		.instagram-icon {
+			width: 24px;
+			height: 24px;
+		}
+	}
+
+	/* Reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		.contact-button,
+		.pulse-ring {
+			animation: none;
+		}
+
+		.contact-button:hover {
+			transform: none;
+		}
+
+		.floating-contact.heartbeat-mode .contact-button,
+		.floating-contact.heartbeat-mode .pulse-ring {
+			animation: none;
+		}
+	}
+</style>

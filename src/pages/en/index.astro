@@ -1,0 +1,89 @@
+---
+import HeroCinematic from "../../components/en/HeroCinematic.astro";
+import NuestrosServicios from "../../components/en/NuestrosServicios.astro";
+import WhyChooseUs from "../../components/en/WhyChooseUs.astro";
+import HowWeDoIt from "../../components/en/HowWeDoIt.astro";
+import BeforeAfter from "../../components/en/BeforeAfter.astro";
+import CertificacionesReconocimientos from "../../components/en/CertificacionesReconocimientos.astro";
+import Conocenos30seg from "../../components/en/Conocenos30seg.astro";
+import ConoceOdontologos from "../../components/en/ConoceOdontologos.astro";
+import Testimonios from "../../components/en/Testimonios.astro";
+import PreguntasFrecuentes from "../../components/en/PreguntasFrecuentes.astro";
+import CallToAction from "../../components/en/CallToAction.astro";
+import LocationContact from "../../components/en/LocationContact.astro";
+import FloatingContactButton from "../../components/en/FloatingContactButton.astro";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>GlamSmile — Premium Aesthetic Dentistry</title>
+		<meta name="description" content="Transform your smile with premium aesthetic dentistry. Ceramic veneers and high-quality resins with immediate, natural results." />
+	</head>
+	<body>
+		<HeroCinematic />
+		<WhyChooseUs />
+		<Conocenos30seg />
+		<HowWeDoIt />
+		<BeforeAfter />
+		<CertificacionesReconocimientos />
+		<NuestrosServicios />
+		<ConoceOdontologos />
+		<Testimonios />
+		<PreguntasFrecuentes />
+		<LocationContact />
+		<CallToAction />
+		
+		<!-- Floating Contact Button -->
+		<FloatingContactButton />
+	</body>
+</html>
+
+<style is:global>
+	:root{
+		--color-bg: #0b0c0f;
+		--color-surface: #111318;
+		--color-text: #eaeef5;
+		--color-muted: #b8c0cc;
+		--color-accent: #f3c98b;
+		--color-accent-contrast: #111318;
+		--color-focus: #88c0ff;
+
+		--font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+			"Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+			"Segoe UI Emoji";
+		--font-weight-regular: 400;
+		--font-weight-medium: 500;
+		--font-weight-semibold: 600;
+		--font-weight-bold: 700;
+
+		--max-content-width: 1200px;
+		--why-bg: #f4f6f8;
+		--why-surface: #ffffff;
+		--why-text: #1d232f;
+		--why-muted: #4b5565;
+		--why-accent: #f3c98b;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+
+		/* Fonts */
+		font-family: var(--font-sans);
+		font-weight: var(--font-weight-regular);
+		font-size: 16px;
+		line-height: 1.6;
+		color: var(--color-text);
+		background: var(--color-bg);
+		overflow-x: hidden;
+	}
+</style>

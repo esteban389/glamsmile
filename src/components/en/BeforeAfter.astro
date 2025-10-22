@@ -1,0 +1,353 @@
+<section class="before-after" id="before-after" aria-labelledby="before-after-title">
+	<div class="container">
+		<h2 id="before-after-title">Real smiles. Real results.</h2>
+		<p class="subtitle">Transformations in just 24/48 hours.</p>
+		
+		<div class="comparisons">
+			<div class="comparison">
+				<div class="comparison-container">
+					<div class="before-section">
+						<picture>
+							<source srcset="/assets/before1.avif" type="image/avif" />
+							<source srcset="/assets/before1.webp" type="image/webp" />
+							<img src="/assets/before1.png" alt="Before dental treatment" loading="lazy" decoding="async" />
+						</picture>
+						<span class="label">Before</span>
+					</div>
+					<div class="after-section">
+						<picture>
+							<source srcset="/assets/after1.avif" type="image/avif" />
+							<source srcset="/assets/after1.webp" type="image/webp" />
+							<img src="/assets/after1.png" alt="After dental treatment" loading="lazy" decoding="async" />
+						</picture>
+						<span class="label">After</span>
+					</div>
+					<div class="slider-line"></div>
+					<input type="range" class="slider" min="0" max="100" value="50" aria-label="Compare before and after" />
+				</div>
+			</div>
+			
+			<div class="comparison">
+				<div class="comparison-container">
+					<div class="before-section">
+						<picture>
+							<source srcset="/assets/before2.avif" type="image/avif" />
+							<source srcset="/assets/before2.webp" type="image/webp" />
+							<img src="/assets/before2.png" alt="Before dental treatment" loading="lazy" decoding="async" />
+						</picture>
+						<span class="label">Before</span>
+					</div>
+					<div class="after-section">
+						<picture>
+							<source srcset="/assets/after2.avif" type="image/avif" />
+							<source srcset="/assets/after2.webp" type="image/webp" />
+							<img src="/assets/after2.png" alt="After dental treatment" loading="lazy" decoding="async" />
+						</picture>
+						<span class="label">After</span>
+					</div>
+					<div class="slider-line"></div>
+					<input type="range" class="slider" min="0" max="100" value="50" aria-label="Compare before and after" />
+				</div>
+			</div>
+			
+			<div class="comparison">
+				<div class="comparison-container">
+					<div class="before-section">
+						<picture>
+							<source srcset="/assets/before3.avif" type="image/avif" />
+							<source srcset="/assets/before3.webp" type="image/webp" />
+							<img src="/assets/before3.png" alt="Before dental treatment" loading="lazy" decoding="async" />
+						</picture>
+						<span class="label">Before</span>
+					</div>
+					<div class="after-section">
+						<picture>
+							<source srcset="/assets/after3.avif" type="image/avif" />
+							<source srcset="/assets/after3.webp" type="image/webp" />
+							<img src="/assets/after3.png" alt="After dental treatment" loading="lazy" decoding="async" />
+						</picture>
+						<span class="label">After</span>
+					</div>
+					<div class="slider-line"></div>
+					<input type="range" class="slider" min="0" max="100" value="50" aria-label="Compare before and after" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="gallery">
+			<div class="gallery-item">
+				<picture>
+					<source srcset="/assets/before_after.avif" type="image/avif" />
+					<source srcset="/assets/before_after.webp" type="image/webp" />
+					<img src="/assets/before_after.jpg" alt="Dental transformation before and after" loading="lazy" decoding="async" />
+				</picture>
+			</div>
+			<div class="gallery-item">
+				<picture>
+					<source srcset="/assets/before_after2.avif" type="image/avif" />
+					<source srcset="/assets/before_after2.webp" type="image/webp" />
+					<img src="/assets/before_after2.jpg" alt="Dental transformation before and after" loading="lazy" decoding="async" />
+				</picture>
+			</div>
+			<div class="gallery-item">
+				<picture>
+					<source srcset="/assets/before_after3.avif" type="image/avif" />
+					<source srcset="/assets/before_after3.webp" type="image/webp" />
+					<img src="/assets/before_after3.jpg" alt="Dental transformation before and after" loading="lazy" decoding="async" />
+				</picture>
+			</div>
+			<div class="gallery-item">
+				<picture>
+					<source srcset="/assets/before_after4.avif" type="image/avif" />
+					<source srcset="/assets/before_after4.webp" type="image/webp" />
+					<img src="/assets/before_after4.jpg" alt="Dental transformation before and after" loading="lazy" decoding="async" />
+				</picture>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	// Before/After Slider Functionality
+	document.addEventListener('DOMContentLoaded', function() {
+		const sliders = document.querySelectorAll('.slider');
+		
+		sliders.forEach(slider => {
+			const container = slider.closest('.comparison-container');
+			const afterSection = container.querySelector('.after-section');
+			
+			function updateSlider() {
+				const value = slider.value;
+				afterSection.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+			}
+			
+			// Initialize
+			updateSlider();
+			
+			// Update on input
+			slider.addEventListener('input', updateSlider);
+		});
+	});
+</script>
+
+<style>
+	.before-after {
+		background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+		color: #ffffff;
+		padding: clamp(60px, 10vw, 120px) 0;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 clamp(20px, 4vw, 40px);
+		text-align: center;
+	}
+
+	h2 {
+		font-size: clamp(32px, 5vw, 48px);
+		font-weight: 700;
+		margin: 0 0 16px;
+		background: linear-gradient(135deg, #ffffff 0%, #f3c98b 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		line-height: 1.2;
+	}
+
+	.subtitle {
+		font-size: clamp(18px, 2.5vw, 22px);
+		color: rgba(255, 255, 255, 0.8);
+		margin: 0 0 60px;
+		font-weight: 400;
+	}
+
+	/* Comparisons Section */
+	.comparisons {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 40px;
+		margin-bottom: 80px;
+	}
+
+	.comparison {
+		position: relative;
+		border-radius: 20px;
+		overflow: hidden;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+		background: #1a1a1a;
+	}
+
+	.comparison-container {
+		position: relative;
+		aspect-ratio: 4/3;
+		overflow: hidden;
+	}
+
+	.before-section,
+	.after-section {
+		position: absolute;
+		inset: 0;
+	}
+
+	.after-section {
+		clip-path: inset(0 50% 0 0);
+		transition: clip-path 0.1s ease;
+	}
+
+	.before-section img,
+	.after-section img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	.label {
+		position: absolute;
+		top: 16px;
+		background: rgba(0, 0, 0, 0.8);
+		color: #ffffff;
+		padding: 8px 16px;
+		border-radius: 20px;
+		font-size: 14px;
+		font-weight: 600;
+		backdrop-filter: blur(10px);
+	}
+
+	.before-section .label {
+		left: 16px;
+	}
+
+	.after-section .label {
+		right: 16px;
+	}
+
+	.slider-line {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: 4px;
+		height: 100%;
+		background: linear-gradient(180deg, #f3c98b 0%, #e6b366 100%);
+		transform: translateX(-50%);
+		z-index: 3;
+		pointer-events: none;
+	}
+
+	.slider-line::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 24px;
+		height: 24px;
+		background: #f3c98b;
+		border: 3px solid #ffffff;
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	}
+
+	.slider {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		cursor: ew-resize;
+		z-index: 4;
+	}
+
+	/* Gallery Section */
+	.gallery {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 20px;
+	}
+
+	.gallery-item {
+		position: relative;
+		border-radius: 16px;
+		overflow: hidden;
+		aspect-ratio: 4/3;
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.gallery-item:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+	}
+
+	.gallery-item img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.3s ease;
+	}
+
+	.gallery-item:hover img {
+		transform: scale(1.05);
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.comparisons {
+			grid-template-columns: 1fr;
+			gap: 30px;
+			margin-bottom: 60px;
+		}
+
+		.gallery {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 16px;
+		}
+
+		.label {
+			font-size: 12px;
+			padding: 6px 12px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.gallery {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* Animation */
+	@media (prefers-reduced-motion: no-preference) {
+		.comparison {
+			animation: fade-in-up 0.6s ease forwards;
+			opacity: 0;
+			transform: translateY(30px);
+		}
+
+		.comparison:nth-child(1) { animation-delay: 0.1s; }
+		.comparison:nth-child(2) { animation-delay: 0.2s; }
+		.comparison:nth-child(3) { animation-delay: 0.3s; }
+
+		.gallery-item {
+			animation: fade-in-up 0.6s ease forwards;
+			opacity: 0;
+			transform: translateY(20px);
+		}
+
+		.gallery-item:nth-child(1) { animation-delay: 0.4s; }
+		.gallery-item:nth-child(2) { animation-delay: 0.5s; }
+		.gallery-item:nth-child(3) { animation-delay: 0.6s; }
+		.gallery-item:nth-child(4) { animation-delay: 0.7s; }
+
+		@keyframes fade-in-up {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	}
+</style>
