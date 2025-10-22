@@ -65,16 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
 	faqQuestions.forEach(question => {
 		question.addEventListener('click', () => {
 			const faqItem = question.parentElement;
-			const answer = faqItem.querySelector('.faq-answer');
-			const icon = question.querySelector('.faq-icon');
+			if (!faqItem) return;
+			const answer = faqItem.querySelector('.faq-answer') as HTMLElement | null;
+			if (!answer) return;
+			const icon = question.querySelector('.faq-icon') as HTMLElement | null;
+			if (!icon) return;
 			const isExpanded = question.getAttribute('aria-expanded') === 'true';
 
 			// Close all other FAQ items
 			faqQuestions.forEach(otherQuestion => {
 				if (otherQuestion !== question) {
 					const otherItem = otherQuestion.parentElement;
-					const otherAnswer = otherItem.querySelector('.faq-answer');
-					const otherIcon = otherQuestion.querySelector('.faq-icon');
+					if (!otherItem) return;
+					const otherAnswer = otherItem.querySelector('.faq-answer') as HTMLElement | null;
+					if (!otherAnswer) return;
+					const otherIcon = otherQuestion.querySelector('.faq-icon') as HTMLElement | null;
+					if (!otherIcon) return;
 
 					otherQuestion.setAttribute('aria-expanded', 'false');
 					otherAnswer.setAttribute('aria-hidden', 'true');
@@ -165,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		background-color: rgba(243, 201, 139, 0.05);
 	}
 
-	.faq-question:focus {
+	.faq-question:focus-visible {
 		outline: 2px solid var(--color-focus);
 		outline-offset: -2px;
 	}
