@@ -1,46 +1,63 @@
 <section class="why" aria-labelledby="why-title">
-	<div class="bg-layer" aria-hidden="true"></div>
 	<div class="container">
-		<div class="media">
-			<picture>
-				<source srcset="/assets/doctors.avif" type="image/avif" />
-				<source srcset="/assets/doctors.webp" type="image/webp" />
-				<img src="/assets/doctors.jpg" alt="Equipo Glam Smile: especialistas en odontología estética" loading="lazy" decoding="async" width="900" height="1200" />
-			</picture>
-			<span class="gold-curve" aria-hidden="true"></span>
-		</div>
-		<div class="content">
-			<div class="card">
-				<h2 id="why-title">¿Por qué escogernos?</h2>
-				<p>
-					Con más de <strong>5000 pacientes</strong> satisfechos, somos especialistas en 
-					odontología estética que combinamos <strong>ciencia, arte y tecnología</strong> 
-					para crear sonrisas naturales y duraderas.
+		<div class="content-wrapper">
+			<div class="hero-content">
+				<div class="badge">
+					<span class="badge-text">+5000 Pacientes Satisfechos</span>
+				</div>
+				<h2 id="why-title">La sonrisa que siempre soñaste</h2>
+				<p class="subtitle">
+					Especialistas en odontología estética que combinan ciencia, arte y tecnología 
+					para transformar tu sonrisa y <strong>devolver tu confianza</strong>.
 				</p>
-				<p>
-					Cada tratamiento es <strong>100% personalizado</strong>, utilizando materiales 
-					de alta calidad como carillas cerámicas y lentes de disilicato de litio. 
-					No solo transformamos tu sonrisa, sino que <strong>devolvemos tu confianza</strong>.
-				</p>
-
-				<ul class="pillars" aria-label="Nuestros valores">
-					<li>
-						<span class="icon" aria-hidden="true">•</span>
-						<span>Experiencia</span>
-					</li>
-					<li>
-						<span class="icon" aria-hidden="true">•</span>
-						<span>Tecnología</span>
-					</li>
-					<li>
-						<span class="icon" aria-hidden="true">•</span>
-						<span>Personalización</span>
-					</li>
-					<li>
-						<span class="icon" aria-hidden="true">•</span>
-						<span>Confianza</span>
-					</li>
-				</ul>
+				
+				<div class="features-grid">
+					<div class="feature">
+						<div class="feature-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M9 12l2 2 4-4"/>
+								<circle cx="12" cy="12" r="9"/>
+							</svg>
+						</div>
+						<div class="feature-content">
+							<h3>100% Personalizado</h3>
+							<p>Cada tratamiento diseñado específicamente para ti</p>
+						</div>
+					</div>
+					
+					<div class="feature">
+						<div class="feature-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+							</svg>
+						</div>
+						<div class="feature-content">
+							<h3>Tecnología Avanzada</h3>
+							<p>Materiales de alta calidad y técnicas innovadoras</p>
+						</div>
+					</div>
+					
+					<div class="feature">
+						<div class="feature-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M20 6L9 17l-5-5"/>
+							</svg>
+						</div>
+						<div class="feature-content">
+							<h3>Resultados Duraderos</h3>
+							<p>Sonrisas naturales que perduran en el tiempo</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="media">
+				<picture>
+					<source srcset="/assets/doctors.avif" type="image/avif" />
+					<source srcset="/assets/doctors.webp" type="image/webp" />
+					<img src="/assets/doctors.jpg" alt="Equipo Glam Smile: especialistas en odontología estética" loading="lazy" decoding="async" width="900" height="1200" />
+				</picture>
+				<div class="media-overlay"></div>
 			</div>
 		</div>
 	</div>
@@ -49,118 +66,209 @@
 <style>
 	.why {
 		position: relative;
-		background: var(--why-bg);
-		color: var(--why-text);
-		overflow: clip;
-		padding: clamp(48px, 8vw, 120px) 0;
-	}
-
-	.bg-layer {
-		position: absolute;
-		inset: 0;
-		background:
-			linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,1) 100%),
-			radial-gradient(1200px 60% at 80% 20%, rgba(243,201,139,0.12), transparent 60%),
-			radial-gradient(900px 50% at 20% 80%, rgba(17,19,24,0.06), transparent 60%);
-		mask-image: radial-gradient(90% 70% at 50% 50%, black 60%, transparent 100%);
-		pointer-events: none;
+		background: linear-gradient(135deg, #fafafa 0%, #f8f9fa 100%);
+		color: #1a1a1a;
+		overflow: hidden;
+		padding: clamp(60px, 10vw, 120px) 0;
 	}
 
 	.container {
 		max-width: 1200px;
 		margin: 0 auto;
+		padding: 0 clamp(20px, 4vw, 40px);
+	}
+
+	.content-wrapper {
 		display: grid;
-		grid-template-columns: 1.05fr 0.95fr;
-		gap: clamp(20px, 4vw, 48px);
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: clamp(40px, 6vw, 80px);
 		align-items: center;
-		padding: 0 clamp(16px, 3vw, 24px);
+	}
+
+	/* Hero Content */
+	.hero-content {
+		position: relative;
+		z-index: 2;
+	}
+
+	.badge {
+		display: inline-flex;
+		align-items: center;
+		background: linear-gradient(135deg, #f3c98b 0%, #e6b366 100%);
+		color: #2c1810;
+		padding: 8px 16px;
+		border-radius: 50px;
+		font-size: 14px;
+		font-weight: 600;
+		margin-bottom: 20px;
+		box-shadow: 0 4px 12px rgba(243, 201, 139, 0.3);
+	}
+
+	.badge-text {
 		position: relative;
 	}
 
+	.badge-text::before {
+		content: '✓';
+		margin-right: 8px;
+		font-weight: bold;
+	}
+
+	h2 {
+		font-size: clamp(32px, 5vw, 48px);
+		font-weight: 700;
+		line-height: 1.2;
+		margin: 0 0 20px;
+		color: #1a1a1a;
+		letter-spacing: -0.02em;
+	}
+
+	.subtitle {
+		font-size: clamp(18px, 2.5vw, 22px);
+		line-height: 1.6;
+		color: #4a5568;
+		margin: 0 0 40px;
+		font-weight: 400;
+	}
+
+	/* Features Grid */
+	.features-grid {
+		display: grid;
+		gap: 24px;
+	}
+
+	.feature {
+		display: flex;
+		align-items: flex-start;
+		gap: 16px;
+		padding: 20px;
+		background: white;
+		border-radius: 16px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		transition: all 0.3s ease;
+	}
+
+	.feature:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+	}
+
+	.feature-icon {
+		flex-shrink: 0;
+		width: 48px;
+		height: 48px;
+		background: linear-gradient(135deg, #f3c98b 0%, #e6b366 100%);
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #2c1810;
+	}
+
+	.feature-content h3 {
+		font-size: 18px;
+		font-weight: 600;
+		margin: 0 0 8px;
+		color: #1a1a1a;
+	}
+
+	.feature-content p {
+		font-size: 15px;
+		color: #6b7280;
+		margin: 0;
+		line-height: 1.5;
+	}
+
+	/* Media Section */
 	.media {
 		position: relative;
-		background: var(--why-surface);
-		border-radius: 20px;
-		box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+		border-radius: 24px;
 		overflow: hidden;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 		transform: translateY(0);
-		animation: float-up linear both;
-		animation-timeline: view();
-		animation-range: entry 0% cover 60%;
+		transition: transform 0.6s ease;
 	}
 
-	.media img { display: block; width: 100%; height: auto; }
+	.media:hover {
+		transform: translateY(-8px);
+	}
 
-	/* Elegant gold curve accent */
-	.gold-curve {
+	.media img {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	.media-overlay {
 		position: absolute;
-		left: -10%;
-		bottom: 12%;
-		width: 140%;
-		height: 2px;
-		background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--why-accent) 80%, white 20%), transparent);
-		filter: drop-shadow(0 2px 6px rgba(243,201,139,0.35));
-	}
-
-	.content { position: relative; }
-
-	.card {
-		position: relative;
-		background: color-mix(in oklab, var(--why-surface) 85%, white 15%);
-		border: 1px solid color-mix(in oklab, #000 8%, transparent);
-		border-radius: 18px;
-		padding: clamp(18px, 2.2vw, 28px);
-		box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-		backdrop-filter: blur(3px);
-		/* Overlap composition */
-		margin-top: clamp(-60px, -6vw, -90px);
-		z-index: 1;
-	}
-
-	/* subtle top shine */
-	.card::before {
-		content: '';
-		position: absolute;
-		top: -1px;
-		left: 12%;
-		width: 76%;
-		height: 1px;
-		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+		inset: 0;
+		background: linear-gradient(
+			135deg,
+			rgba(243, 201, 139, 0.1) 0%,
+			rgba(243, 201, 139, 0.05) 50%,
+			transparent 100%
+		);
 		pointer-events: none;
 	}
 
-	.card h2 { margin: 0 0 12px; font-size: clamp(24px, 3.2vw, 36px); }
-	.card p { margin: 0 0 12px; color: var(--why-muted); line-height: 1.65; }
-
-	.pillars {
-		margin: 20px 0 0;
-		padding: 0;
-		list-style: none;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 10px;
-	}
-
-	.pillars li {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		background: var(--why-surface);
-		border: 1px solid color-mix(in oklab, #000 8%, transparent);
-		border-radius: 999px;
-		padding: 10px 14px;
-		font-weight: 500;
-	}
-
-	.icon { font-size: 18px; }
-
-	@keyframes float-up {
-		from { transform: translateY(10px); opacity: 0.96; }
-		to { transform: translateY(0); opacity: 1; }
-	}
-
+	/* Responsive Design */
 	@media (max-width: 1024px) {
-		.container { grid-template-columns: 1fr; }
-		.card { margin-top: -40px; }
+		.content-wrapper {
+			grid-template-columns: 1fr;
+			gap: 50px;
+		}
+
+		.hero-content {
+			order: 2;
+		}
+
+		.media {
+			order: 1;
+		}
+
+		.features-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.why {
+			padding: clamp(40px, 8vw, 80px) 0;
+		}
+
+		.features-grid {
+			gap: 16px;
+		}
+
+		.feature {
+			padding: 16px;
+		}
+
+		.feature-icon {
+			width: 40px;
+			height: 40px;
+		}
+	}
+
+	/* Animation */
+	@media (prefers-reduced-motion: no-preference) {
+		.feature {
+			animation: fade-in-up 0.6s ease forwards;
+			opacity: 0;
+			transform: translateY(20px);
+		}
+
+		.feature:nth-child(1) { animation-delay: 0.1s; }
+		.feature:nth-child(2) { animation-delay: 0.2s; }
+		.feature:nth-child(3) { animation-delay: 0.3s; }
+
+		@keyframes fade-in-up {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
 	}
 </style>
