@@ -28,11 +28,11 @@
 							muted
 							playsinline
 							preload="metadata"
-							aria-label="Video: Advanced technology"
-							data-duration="0:28"
+							aria-label="Video: Our team of specialists"
+							data-duration="0:44"
 						></video>
 						<div class="slide-info">
-							<h3>Advanced Technology</h3>
+							<h3>Our Team</h3>
 						</div>
 					</div>
 
@@ -42,11 +42,11 @@
 							muted
 							playsinline
 							preload="metadata"
-							aria-label="Video: Personalized treatment"
+							aria-label="Video: Advanced dental technology"
 							data-duration="0:35"
 						></video>
 						<div class="slide-info">
-							<h3>Personalized Treatment</h3>
+							<h3>Advanced Technology</h3>
 						</div>
 					</div>
 
@@ -56,11 +56,11 @@
 							muted
 							playsinline
 							preload="metadata"
-							aria-label="Video: Immediate results"
-							data-duration="0:42"
+							aria-label="Video: Patient testimonials"
+							data-duration="0:28"
 						></video>
 						<div class="slide-info">
-							<h3>Immediate Results</h3>
+							<h3>Real Testimonials</h3>
 						</div>
 					</div>
 
@@ -70,11 +70,11 @@
 							muted
 							playsinline
 							preload="metadata"
-							aria-label="Video: Satisfied patients"
-							data-duration="0:29"
+							aria-label="Video: Treatment process"
+							data-duration="0:18"
 						></video>
 						<div class="slide-info">
-							<h3>Satisfied Patients</h3>
+							<h3>Our Process</h3>
 						</div>
 					</div>
 
@@ -84,272 +84,510 @@
 							muted
 							playsinline
 							preload="metadata"
-							aria-label="Video: Professional team"
-							data-duration="0:33"
+							aria-label="Video: Before and after results"
+							data-duration="0:28"
 						></video>
 						<div class="slide-info">
-							<h3>Professional Team</h3>
+							<h3>Amazing Results</h3>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<!-- Navigation -->
-			<div class="carousel-nav">
-				<button class="nav-btn prev-btn" aria-label="Previous video">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<polyline points="15,18 9,12 15,6"></polyline>
-					</svg>
-				</button>
-				<button class="nav-btn next-btn" aria-label="Next video">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<polyline points="9,18 15,12 9,6"></polyline>
-					</svg>
-				</button>
-			</div>
+				<button class="carousel-btn prev" aria-label="Previous">‹</button>
+				<button class="carousel-btn next" aria-label="Next">›</button>
 
-			<!-- Indicators -->
-			<div class="carousel-indicators">
-				<button class="indicator active" aria-label="Go to video 1" data-slide="0"></button>
-				<button class="indicator" aria-label="Go to video 2" data-slide="1"></button>
-				<button class="indicator" aria-label="Go to video 3" data-slide="2"></button>
-				<button class="indicator" aria-label="Go to video 4" data-slide="3"></button>
-				<button class="indicator" aria-label="Go to video 5" data-slide="4"></button>
-				<button class="indicator" aria-label="Go to video 6" data-slide="5"></button>
+				<div class="video-controls">
+					<button class="video-control-btn play-pause" aria-label="Play/Pause">
+						<span class="play-icon">▶</span>
+					</button>
+					<button class="video-control-btn mute-unmute" aria-label="Mute/Unmute">
+						<span class="mute-icon">🔇</span>
+					</button>
+				</div>
+
+				<div class="progress-bar">
+					<div class="progress-fill"></div>
+				</div>
+
+				<!-- Close button for expanded mode -->
+				<button class="close-btn" aria-label="Close" style="display: none;">
+					<span>✕</span>
+				</button>
 			</div>
 		</div>
 	</div>
-</section>
 
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		const carousel = document.querySelector('.carousel');
-		const track = document.querySelector('.carousel-track');
-		const slides = document.querySelectorAll('.carousel-slide');
-		const videos = document.querySelectorAll('.carousel-slide video');
-		const prevBtn = document.querySelector('.prev-btn');
-		const nextBtn = document.querySelector('.next-btn');
-		const indicators = document.querySelectorAll('.indicator');
-		
-		let currentSlide = 0;
-		let isPlaying = false;
-		let autoplayTimer;
-		
-		// Initialize
-		function init() {
-			updateCarousel();
-			setupEventListeners();
-			startAutoplay();
-		}
-		
-		// Update carousel position and indicators
-		function updateCarousel() {
-			const slideWidth = slides[0].offsetWidth;
-			track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-			
-			// Update indicators
-			indicators.forEach((indicator, index) => {
-				indicator.classList.toggle('active', index === currentSlide);
-			});
-			
-			// Pause all videos and play current
-			videos.forEach((video, index) => {
-				if (index === currentSlide) {
-					video.currentTime = 0;
-					video.play().catch(() => {});
+	<script lang="ts">
+		document.addEventListener('DOMContentLoaded', function() {
+			const track = document.querySelector('.carousel-track');
+			const slides = document.querySelectorAll('.carousel-slide');
+			const prevBtn = document.querySelector('.carousel-btn.prev');
+			const nextBtn = document.querySelector('.carousel-btn.next');
+			const playPauseBtn = document.querySelector('.video-control-btn.play-pause');
+			const muteUnmuteBtn = document.querySelector('.video-control-btn.mute-unmute');
+			const playIcon = document.querySelector('.play-icon');
+			const muteIcon = document.querySelector('.mute-icon');
+
+			let currentSlide = 0;
+			const totalSlides = slides.length;
+			let autoplayInterval;
+			let progressInterval;
+			let isPlaying = false;
+			let isMuted = true; // All videos start muted
+			let isExpanded = false; // State for expanded mode
+
+			// Function to manage videos
+			function manageVideos() {
+				slides.forEach((slide, index) => {
+					const video = slide.querySelector('video');
+					if (video) {
+						// Sync mute state with global state
+						video.muted = isMuted;
+
+						if (index === currentSlide) {
+							// Play current video only if in play mode
+							if (isPlaying) {
+								video.play().then(() => {
+									// Start progress bar after video starts playing
+									startProgress();
+								}).catch(e => {
+									isPlaying = false;
+									if (playIcon) playIcon.textContent = '▶';
+								});
+							} else {
+								video.pause();
+								stopProgress();
+							}
+
+							// Update button states
+							if (playIcon) playIcon.textContent = isPlaying ? '⏸' : '▶';
+							if (muteIcon) muteIcon.textContent = isMuted ? '🔇' : '🔊';
+						} else {
+							// Pause other videos and reset
+							video.pause();
+							video.currentTime = 0;
+						}
+					}
+				});
+			}
+
+			// Function to toggle play/pause
+			function togglePlayPause() {
+				isPlaying = !isPlaying;
+
+				if (isPlaying) {
+					// Resume all videos (only current will play)
+					slides.forEach((slide, index) => {
+						const video = slide.querySelector('video');
+						if (video) {
+							video.muted = isMuted;
+						}
+					});
+
+					// Play current video and start autoplay
+					const currentVideo = slides[currentSlide]?.querySelector('video');
+					if (currentVideo) {
+						currentVideo.play().then(() => {
+							// Start progress bar after video starts
+							startProgress();
+						}).catch(e => {
+							isPlaying = false;
+						});
+					}
+					startAutoplay();
 				} else {
-					video.pause();
+					// Pause all videos and stop autoplay
+					slides.forEach((slide) => {
+						const video = slide.querySelector('video');
+						if (video) {
+							video.pause();
+						}
+					});
+					stopProgress();
+					stopAutoplay();
 				}
-			});
-		}
-		
-		// Navigation functions
-		function goToSlide(slideIndex) {
-			currentSlide = slideIndex;
-			updateCarousel();
-			resetAutoplay();
-		}
-		
-		function nextSlide() {
-			currentSlide = (currentSlide + 1) % slides.length;
-			updateCarousel();
-			resetAutoplay();
-		}
-		
-		function prevSlide() {
-			currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-			updateCarousel();
-			resetAutoplay();
-		}
-		
-		// Autoplay functions
-		function startAutoplay() {
-			autoplayTimer = setInterval(() => {
-				if (!isPlaying) {
-					nextSlide();
+
+				// Update button
+				if (playIcon) playIcon.textContent = isPlaying ? '⏸' : '▶';
+			}
+
+			// Function to toggle mute/unmute
+			function toggleMuteUnmute() {
+				isMuted = !isMuted;
+
+				// Apply mute state to all videos
+				slides.forEach((slide) => {
+					const video = slide.querySelector('video');
+					if (video) {
+						video.muted = isMuted;
+					}
+				});
+
+				// Update button
+				if (muteIcon) muteIcon.textContent = isMuted ? '🔇' : '🔊';
+			}
+
+			// Function to start progress bar
+			function startProgress() {
+				stopProgress();
+				resetProgress();
+
+				const duration = getCurrentSlideDuration();
+				const startTime = Date.now();
+
+
+				progressInterval = setInterval(() => {
+					const elapsed = Date.now() - startTime;
+					const progress = Math.min((elapsed / duration) * 100, 100);
+
+					const progressFill = document.querySelector('.progress-fill');
+					if (progressFill) {
+						progressFill.style.width = `${progress}%`;
+					}
+
+					// If we reach 100%, stop progress
+					if (progress >= 100) {
+						stopProgress();
+					}
+				}, 50); // Update every 50ms for smooth animation
+			}
+
+			// Function to stop progress bar
+			function stopProgress() {
+				if (progressInterval) {
+					clearInterval(progressInterval);
+					progressInterval = null;
 				}
-			}, 8000); // 8 seconds per slide
-		}
-		
-		function resetAutoplay() {
-			clearInterval(autoplayTimer);
-			startAutoplay();
-		}
-		
-		function pauseAutoplay() {
-			isPlaying = true;
-			clearInterval(autoplayTimer);
-		}
-		
-		function resumeAutoplay() {
-			isPlaying = false;
-			startAutoplay();
-		}
-		
-		// Event listeners
-		function setupEventListeners() {
-			// Navigation buttons
-			nextBtn.addEventListener('click', nextSlide);
-			prevBtn.addEventListener('click', prevSlide);
-			
-			// Indicators
-			indicators.forEach((indicator, index) => {
-				indicator.addEventListener('click', () => goToSlide(index));
-			});
-			
-			// Pause autoplay on hover
-			carousel.addEventListener('mouseenter', pauseAutoplay);
-			carousel.addEventListener('mouseleave', resumeAutoplay);
-			
-			// Touch/swipe support
-			let startX = 0;
-			let currentX = 0;
-			let isDragging = false;
-			
-			track.addEventListener('touchstart', (e) => {
-				startX = e.touches[0].clientX;
-				isDragging = true;
-				pauseAutoplay();
-			});
-			
-			track.addEventListener('touchmove', (e) => {
-				if (!isDragging) return;
-				currentX = e.touches[0].clientX;
-			});
-			
-			track.addEventListener('touchend', () => {
-				if (!isDragging) return;
-				isDragging = false;
-				
-				const diff = startX - currentX;
-				const threshold = 50;
-				
-				if (Math.abs(diff) > threshold) {
-					if (diff > 0) {
-						nextSlide();
-					} else {
-						prevSlide();
+			}
+
+			// Function to reset progress bar
+			function resetProgress() {
+				const progressFill = document.querySelector('.progress-fill');
+				if (progressFill) {
+					progressFill.style.width = '0%';
+				}
+			}
+
+			// Function to expand/collapse video (desktop only)
+			function toggleExpand() {
+				// Only allow on desktop (not mobile)
+				if (window.innerWidth < 768) return;
+
+				isExpanded = !isExpanded;
+				const carousel = document.querySelector('.carousel');
+				const carouselContainer = document.querySelector('.carousel-container');
+
+				if (isExpanded) {
+					// Expanded mode
+					carousel.classList.add('expanded');
+					carouselContainer.classList.add('expanded');
+
+					// Pause autoplay when expanded
+					stopAutoplay();
+
+					// Activate playback and audio when expanding
+					isPlaying = true;
+					isMuted = false;
+
+					// Update buttons
+					if (playIcon) playIcon.textContent = '⏸';
+					if (muteIcon) muteIcon.textContent = '🔊';
+
+					// Apply changes to all videos
+					slides.forEach((slide) => {
+						const video = slide.querySelector('video');
+						if (video) {
+							video.muted = isMuted;
+						}
+					});
+
+					// Play current video
+					const currentVideo = slides[currentSlide]?.querySelector('video');
+					if (currentVideo) {
+						currentVideo.play().then(() => {
+							// Start progress bar
+							startProgress();
+						}).catch(() => {
+							// Silence autoplay error
+						});
+					}
+				} else {
+					// Normal mode - return to previous state
+					carousel.classList.remove('expanded');
+					carouselContainer.classList.remove('expanded');
+
+					// Keep playback but resume autoplay
+					if (isPlaying) {
+						startAutoplay();
 					}
 				}
-				
-				resumeAutoplay();
-			});
-			
-			// Keyboard navigation
-			document.addEventListener('keydown', (e) => {
-				if (e.key === 'ArrowLeft') {
+			}
+
+			// Function to go to specific slide
+			function goToSlide(slideIndex) {
+				if (slideIndex < 0) slideIndex = totalSlides - 1;
+				if (slideIndex >= totalSlides) slideIndex = 0;
+
+				currentSlide = slideIndex;
+				track.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+				// Reset progress bar when changing slides
+				resetProgress();
+
+				// Manage videos
+				manageVideos();
+
+				// Restart autoplay only if playing
+				if (isPlaying) {
+					const duration = getCurrentSlideDuration();
+					startAutoplay();
+				}
+			}
+
+			// Next slide
+			function nextSlide() {
+				goToSlide(currentSlide + 1);
+			}
+
+			// Previous slide
+			function prevSlide() {
+				goToSlide(currentSlide - 1);
+			}
+
+			// Function to convert mm:ss to milliseconds
+			function parseDuration(durationStr) {
+				const [minutes, seconds] = durationStr.split(':').map(Number);
+				return (minutes * 60 + seconds) * 1000;
+			}
+
+			// Function to get current slide duration
+			function getCurrentSlideDuration() {
+				const currentSlideElement = slides[currentSlide];
+				const video = currentSlideElement?.querySelector('video');
+				const duration = video?.getAttribute('data-duration');
+				const parsedDuration = duration ? parseDuration(duration) : 5000;
+				return parsedDuration;
+			}
+
+			// Start autoplay
+			function startAutoplay() {
+				stopAutoplay();
+				const duration = getCurrentSlideDuration();
+				autoplayInterval = setInterval(nextSlide, duration);
+			}
+
+			// Stop autoplay
+			function stopAutoplay() {
+				if (autoplayInterval) {
+					clearInterval(autoplayInterval);
+				}
+				stopProgress();
+			}
+
+			// Event listeners
+			if (prevBtn) {
+				prevBtn.addEventListener('click', () => {
+					stopAutoplay();
 					prevSlide();
-				} else if (e.key === 'ArrowRight') {
+				});
+			}
+
+			if (nextBtn) {
+				nextBtn.addEventListener('click', () => {
+					stopAutoplay();
 					nextSlide();
+				});
+			}
+
+			// Event listeners for video buttons
+			if (playPauseBtn) {
+				playPauseBtn.addEventListener('click', togglePlayPause);
+			}
+
+			if (muteUnmuteBtn) {
+				muteUnmuteBtn.addEventListener('click', toggleMuteUnmute);
+			}
+
+			// Event listener for carousel click (expand on desktop)
+			const carousel = document.querySelector('.carousel');
+			if (carousel) {
+				carousel.addEventListener('click', (e) => {
+					// Don't expand if clicking on control buttons
+					if (e.target.closest('.carousel-btn') ||
+						e.target.closest('.video-controls') ||
+						e.target.closest('.progress-bar')) {
+						return;
+					}
+
+					// Only expand on desktop
+					if (window.innerWidth >= 768) {
+						toggleExpand();
+					}
+				});
+			}
+
+			// Close with ESC key when expanded
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && isExpanded) {
+					toggleExpand();
 				}
 			});
-			
-			// Resize handler
-			window.addEventListener('resize', updateCarousel);
-		}
-		
-		// Video event listeners
-		videos.forEach((video, index) => {
-			video.addEventListener('ended', () => {
-				if (index === currentSlide) {
-					nextSlide();
-				}
-			});
+
+			// Event listener for close button
+			const closeBtn = document.querySelector('.close-btn');
+			if (closeBtn) {
+				closeBtn.addEventListener('click', (e) => {
+					e.stopPropagation();
+					toggleExpand();
+				});
+			}
+
+			// Set initial states
+			if (playIcon) playIcon.textContent = '▶'; // Start paused
+			if (muteIcon) muteIcon.textContent = '🔇'; // Start muted
+
+			// Initialize carousel
+			manageVideos();
+
+			// Intersection Observer to control automatic playback
+			let userHasInteracted = false; // To know if user has manually controlled
+
+			const observerOptions = {
+				root: null,
+				rootMargin: '-10% 0px -10% 0px',
+				threshold: 0.5
+			};
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						// User arrives at section
+						if (!userHasInteracted) {
+							// Activate playback and sound only if user hasn't intervened
+							isPlaying = true;
+							isMuted = false;
+
+							// Update buttons
+							if (playIcon) playIcon.textContent = '⏸';
+							if (muteIcon) muteIcon.textContent = '🔊';
+
+							// Apply changes and start autoplay
+							manageVideos();
+							startAutoplay();
+						}
+					} else {
+						// User leaves section
+						// Pause and mute always, regardless of user interaction
+						isPlaying = false;
+						isMuted = true;
+
+						// Update buttons
+						if (playIcon) playIcon.textContent = '▶';
+						if (muteIcon) muteIcon.textContent = '🔇';
+
+						// Apply changes and stop autoplay
+						manageVideos();
+						stopAutoplay();
+					}
+				});
+			}, observerOptions);
+
+			// Observe the complete section
+			const section = document.querySelector('.conocenos-30seg');
+			if (section) {
+				observer.observe(section);
+			}
+
+			// Mark that user has interacted when using controls
+			if (playPauseBtn) {
+				playPauseBtn.addEventListener('click', () => {
+					userHasInteracted = true;
+				});
+			}
+
+			if (muteUnmuteBtn) {
+				muteUnmuteBtn.addEventListener('click', () => {
+					userHasInteracted = true;
+				});
+			}
 		});
-		
-		// Initialize carousel
-		init();
-	});
-</script>
+	</script>
+</section>
 
 <style>
 	.conocenos-30seg {
-		background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
-		color: #ffffff;
-		padding: clamp(60px, 10vw, 120px) 0;
 		position: relative;
-		overflow: hidden;
+		background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #fff5f0 100%);
+		color: #2d3748;
+		padding: clamp(48px, 8vw, 120px) 0;
 	}
 
 	.container {
 		max-width: 1200px;
 		margin: 0 auto;
-		padding: 0 clamp(20px, 4vw, 40px);
+		padding: 0 clamp(16px, 3vw, 24px);
 	}
 
 	.intro {
 		text-align: center;
-		margin-bottom: 60px;
+		max-width: 600px;
+		margin: 0 auto clamp(40px, 6vw, 56px);
 	}
 
 	.intro h2 {
-		font-size: clamp(32px, 5vw, 48px);
+		margin: 0 0 12px;
+		font-size: clamp(32px, 5vw, 42px);
 		font-weight: 700;
-		margin: 0 0 16px;
-		background: linear-gradient(135deg, #ffffff 0%, #f3c98b 100%);
+		background: linear-gradient(135deg, #2d3748, #4a5568);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
-		line-height: 1.2;
 	}
 
 	.intro p {
-		font-size: clamp(18px, 2.5vw, 22px);
-		color: rgba(255, 255, 255, 0.8);
 		margin: 0;
+		font-size: clamp(16px, 1.2vw, 18px);
+		line-height: 1.5;
+		color: #718096;
+		font-weight: 500;
 	}
 
-	/* Carousel */
 	.carousel-container {
-		position: relative;
-		max-width: 800px;
+		max-width: 900px;
 		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: clamp(calc(80vh - 100px), 50vw, 720px);
 	}
 
 	.carousel {
 		position: relative;
 		overflow: hidden;
-		border-radius: 24px;
-		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+		border-radius: 20px;
+		background: #000;
+		aspect-ratio: 16/9;
+		box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+		height: 100%;
 	}
 
 	.carousel-track {
 		display: flex;
-		transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		transition: transform 0.4s ease-in-out;
+		height: 100%;
 	}
 
 	.carousel-slide {
-		min-width: 100%;
+		flex: 0 0 100%;
 		position: relative;
-		aspect-ratio: 16/9;
-		background: #000;
+		height: 100%;
 	}
 
 	.carousel-slide video {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		display: block;
 	}
 
 	.slide-info {
@@ -357,127 +595,246 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-		padding: 40px 24px 24px;
+		padding: 20px;
+		background: linear-gradient(to top,
+			rgba(0,0,0,0.95) 0%,
+			rgba(0,0,0,0.85) 30%,
+			rgba(0,0,0,0.6) 60%,
+			rgba(0,0,0,0.3) 80%,
+			transparent 100%
+		);
 		color: white;
+		z-index: 3;
+		text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 	}
 
 	.slide-info h3 {
-		font-size: 24px;
-		font-weight: 600;
 		margin: 0;
-		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+		font-size: clamp(16px, 1.5vw, 20px);
+		font-weight: 600;
+		text-shadow: 0 2px 4px rgba(0,0,0,0.9);
 	}
 
-	/* Navigation */
-	.carousel-nav {
+	.carousel-btn {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		padding: 0 20px;
-		pointer-events: none;
-	}
-
-	.nav-btn {
-		width: 48px;
-		height: 48px;
+		width: 44px;
+		height: 44px;
 		border-radius: 50%;
-		background: rgba(0, 0, 0, 0.7);
-		border: none;
+		border: 2px solid rgba(255,255,255,0.8);
+		background: rgba(0,0,0,0.8);
 		color: white;
 		cursor: pointer;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		transition: all 0.3s ease;
+		font-size: 24px;
+		z-index: 10;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+	}
+
+	.carousel-btn:hover {
+		background: rgba(0,0,0,0.95);
+		border-color: white;
+		transform: translateY(-50%) scale(1.1);
+		box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+	}
+
+	.carousel-btn.prev {
+		left: 20px;
+	}
+
+	.carousel-btn.next {
+		right: 20px;
+	}
+
+	.video-controls {
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		gap: 12px;
+		z-index: 10;
+	}
+
+	.video-control-btn {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		border: 2px solid rgba(255,255,255,0.8);
+		background: rgba(0,0,0,0.8);
+		color: white;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		font-size: 18px;
+		backdrop-filter: blur(8px);
+		box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+	}
+
+	.video-control-btn:hover {
+		background: rgba(0,0,0,0.95);
+		border-color: white;
+		transform: scale(1.1);
+		box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+	}
+
+	.progress-bar {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: rgba(255,255,255,0.2);
+		z-index: 10;
+		overflow: hidden;
+	}
+
+	.progress-fill {
+		height: 100%;
+		width: 0%;
+		background: linear-gradient(90deg, #f3c98b, #e6b574);
+		transition: width 0.1s linear;
+		box-shadow: 0 0 10px rgba(243,201,139,0.5);
+	}
+
+	/* Close button for expanded mode */
+	.close-btn {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		border: 2px solid rgba(255,255,255,0.8);
+		background: rgba(0,0,0,0.8);
+		color: white;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		font-size: 20px;
+		z-index: 20;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.carousel.expanded .close-btn {
+		opacity: 1;
 		pointer-events: auto;
+	}
+
+	.close-btn:hover {
+		background: rgba(0,0,0,0.95);
+		border-color: white;
+		transform: scale(1.1);
+		box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+	}
+
+	/* Expanded mode (desktop only) */
+	.carousel-container.expanded {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 1000;
+		height: 100vh;
+		width: 100vw;
+		max-width: none;
+		background: rgba(0,0,0,0.95);
 		backdrop-filter: blur(10px);
 	}
 
-	.nav-btn:hover {
-		background: rgba(0, 0, 0, 0.9);
-		transform: scale(1.1);
+	.carousel.expanded {
+		height: 90vh;
+		max-height: 90vh;
+		width: 90vw;
+		max-width: 90vw;
+		margin: 5vh auto;
+		border-radius: 20px;
+		box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+		cursor: default;
 	}
 
-	.nav-btn:focus-visible {
-		outline: 2px solid #f3c98b;
-		outline-offset: 2px;
+	.carousel.expanded .carousel-slide video {
+		border-radius: 20px;
+		object-fit: contain;
 	}
 
-	/* Indicators */
-	.carousel-indicators {
-		display: flex;
-		justify-content: center;
-		gap: 12px;
-		margin-top: 24px;
+	/* Smooth transition animation */
+	.carousel-container {
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	.indicator {
-		width: 12px;
-		height: 12px;
-		border-radius: 50%;
-		border: none;
-		background: rgba(255, 255, 255, 0.3);
-		cursor: pointer;
-		transition: all 0.3s ease;
-	}
-
-	.indicator.active {
-		background: #f3c98b;
-		transform: scale(1.2);
-	}
-
-	.indicator:hover {
-		background: rgba(255, 255, 255, 0.6);
+	.carousel {
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	/* Responsive Design */
 	@media (max-width: 768px) {
-		.carousel-nav {
-			padding: 0 12px;
+		.conocenos-30seg {
+			padding: clamp(32px, 6vw, 64px) 0;
 		}
 
-		.nav-btn {
+		/* Disable expanded mode on mobile */
+		.carousel-container {
+			pointer-events: none;
+		}
+
+		.carousel {
+			pointer-events: auto;
+		}
+
+		.carousel .close-btn {
+			display: none !important;
+		}
+	}
+
+		.carousel {
+			aspect-ratio: 9/16;
+			max-width: 400px;
+		}
+
+		.intro h2 {
+			font-size: clamp(28px, 6vw, 36px);
+		}
+
+		.carousel-btn {
 			width: 40px;
 			height: 40px;
-		}
-
-		.slide-info {
-			padding: 30px 16px 16px;
-		}
-
-		.slide-info h3 {
 			font-size: 20px;
+		}
+
+		.carousel-btn.prev {
+			left: 10px;
+		}
+
+		.carousel-btn.next {
+			right: 10px;
+		}
+
+		.video-control-btn {
+			width: 44px;
+			height: 44px;
+			font-size: 16px;
 		}
 	}
 
 	@media (max-width: 480px) {
 		.carousel {
-			border-radius: 16px;
+			max-width: 320px;
+			aspect-ratio: 9/19.5;
 		}
 
-		.nav-btn {
-			width: 36px;
-			height: 36px;
-		}
-
-		.indicator {
-			width: 10px;
-			height: 10px;
-		}
-	}
-
-	/* Reduced motion */
-	@media (prefers-reduced-motion: reduce) {
-		.carousel-track {
-			transition: none;
-		}
-
-		.nav-btn:hover {
-			transform: none;
+		.slide-info h3 {
+			font-size: 16px;
 		}
 	}
 </style>
