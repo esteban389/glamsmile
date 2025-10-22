@@ -28,20 +28,8 @@
 
 			<div class="certification-card">
 				<div class="logo-placeholder" aria-hidden="true">⚡</div>
-				<h3>Advanced Training in Digital Smile Design</h3>
-				<p class="location">International</p>
-			</div>
-
-			<div class="certification-card">
-				<div class="logo-placeholder" aria-hidden="true">🔬</div>
-				<h3>Specialization in Aesthetic Resins</h3>
-				<p class="location">Brazil</p>
-			</div>
-
-			<div class="certification-card">
-				<div class="logo-placeholder" aria-hidden="true">✨</div>
-				<h3>Excellence in Minimally Invasive Techniques</h3>
-				<p class="location">Europe</p>
+				<h3>Training in Minimally Invasive Techniques</h3>
+				<p class="location">Madrid, Spain</p>
 			</div>
 		</div>
 	</div>
@@ -49,52 +37,52 @@
 
 <style>
 	.certificaciones {
-		background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-		padding: clamp(60px, 10vw, 120px) 0;
 		position: relative;
-		overflow: hidden;
+		background: #f8f9fa;
+		color: #2d3748;
+		overflow: clip;
+		padding: clamp(48px, 8vw, 120px) 0;
 	}
 
 	.container {
 		max-width: 1200px;
 		margin: 0 auto;
-		padding: 0 clamp(20px, 4vw, 40px);
+		padding: 0 clamp(16px, 3vw, 24px);
+		position: relative;
 	}
 
 	.intro {
 		text-align: center;
-		max-width: 700px;
-		margin: 0 auto 60px;
+		max-width: 800px;
+		margin: 0 auto clamp(48px, 6vw, 72px);
 	}
 
 	.intro h2 {
-		font-size: clamp(32px, 5vw, 48px);
-		font-weight: 700;
 		margin: 0 0 20px;
-		color: #1a1a1a;
-		line-height: 1.2;
+		font-size: clamp(28px, 4vw, 42px);
+		font-weight: 700;
+		color: #1a202c;
 	}
 
 	.intro p {
-		font-size: clamp(18px, 2.2vw, 20px);
-		line-height: 1.6;
-		color: #4a5568;
 		margin: 0;
+		font-size: clamp(16px, 1.2vw, 18px);
+		line-height: 1.7;
+		color: #4a5568;
 	}
 
 	.certifications-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 24px;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: clamp(24px, 3vw, 32px);
 	}
 
 	.certification-card {
 		background: white;
-		border-radius: 20px;
+		border: 1px solid #e2e8f0;
+		border-radius: 16px;
 		padding: 32px 24px;
 		text-align: center;
-		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-		border: 1px solid rgba(0, 0, 0, 0.06);
 		transition: all 0.3s ease;
 		position: relative;
 		overflow: hidden;
@@ -106,38 +94,47 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		height: 4px;
-		background: linear-gradient(135deg, #f3c98b 0%, #e6b366 100%);
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(243,201,139,0.3), transparent);
 	}
 
 	.certification-card:hover {
-		transform: translateY(-8px);
-		box-shadow: 0 16px 50px rgba(0, 0, 0, 0.12);
+		transform: translateY(-4px);
+		box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+		border-color: rgba(243,201,139,0.3);
 	}
 
 	.logo-placeholder {
-		font-size: 48px;
-		margin-bottom: 20px;
-		display: block;
-		line-height: 1;
+		width: 80px;
+		height: 80px;
+		margin: 0 auto 20px;
+		background: linear-gradient(135deg, #f3c98b 0%, #e5b574 100%);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 36px;
+		color: white;
+		box-shadow: 0 4px 12px rgba(243,201,139,0.3);
 	}
 
 	.certification-card h3 {
-		font-size: 20px;
-		font-weight: 600;
 		margin: 0 0 12px;
-		color: #1a1a1a;
-		line-height: 1.3;
+		font-size: clamp(16px, 1.8vw, 20px);
+		font-weight: 600;
+		color: #1a202c;
+		line-height: 1.4;
 	}
 
 	.location {
-		font-size: 16px;
-		color: #6b7280;
 		margin: 0;
+		font-size: 14px;
+		color: #718096;
 		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
 	}
 
-	/* Responsive Design */
 	@media (max-width: 768px) {
 		.certifications-grid {
 			grid-template-columns: 1fr;
@@ -149,31 +146,9 @@
 		}
 
 		.logo-placeholder {
-			font-size: 40px;
-			margin-bottom: 16px;
-		}
-	}
-
-	/* Animation */
-	@media (prefers-reduced-motion: no-preference) {
-		.certification-card {
-			animation: fade-in-up 0.6s ease forwards;
-			opacity: 0;
-			transform: translateY(30px);
-		}
-
-		.certification-card:nth-child(1) { animation-delay: 0.1s; }
-		.certification-card:nth-child(2) { animation-delay: 0.2s; }
-		.certification-card:nth-child(3) { animation-delay: 0.3s; }
-		.certification-card:nth-child(4) { animation-delay: 0.4s; }
-		.certification-card:nth-child(5) { animation-delay: 0.5s; }
-		.certification-card:nth-child(6) { animation-delay: 0.6s; }
-
-		@keyframes fade-in-up {
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
+			width: 64px;
+			height: 64px;
+			font-size: 28px;
 		}
 	}
 </style>
