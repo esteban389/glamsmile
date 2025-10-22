@@ -9,7 +9,10 @@
 		<div class="steps">
 			<div class="step">
 				<div class="step-icon">
-					<span aria-hidden="true">🔍</span>
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="11" cy="11" r="8"/>
+						<path d="M21 21l-4.35-4.35"/>
+					</svg>
 				</div>
 				<h3>Evaluación profesional</h3>
 				<p>Revisamos tu caso de manera online o presencial, con un diagnóstico detallado para entender tus necesidades y expectativas.</p>
@@ -17,7 +20,12 @@
 			
 			<div class="step">
 				<div class="step-icon">
-					<span aria-hidden="true">📅</span>
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+						<line x1="16" y1="2" x2="16" y2="6"/>
+						<line x1="8" y1="2" x2="8" y2="6"/>
+						<line x1="3" y1="10" x2="21" y2="10"/>
+					</svg>
 				</div>
 				<h3>Presupuesto y agenda</h3>
 				<p>Recibes una propuesta clara y personalizada, y programamos tu tratamiento en la fecha que mejor se ajuste a ti.</p>
@@ -25,7 +33,10 @@
 			
 			<div class="step">
 				<div class="step-icon">
-					<span aria-hidden="true">✈️</span>
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+						<circle cx="12" cy="10" r="3"/>
+					</svg>
 				</div>
 				<h3>Visita a nuestra clínica en Colombia</h3>
 				<p>Te recibimos en nuestras instalaciones, con atención cálida y un ambiente diseñado para tu comodidad.</p>
@@ -33,7 +44,9 @@
 			
 			<div class="step">
 				<div class="step-icon">
-					<span aria-hidden="true">😊</span>
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+					</svg>
 				</div>
 				<h3>Tu nueva sonrisa en 24/48 horas</h3>
 				<p>En uno o dos días obtendrás una sonrisa perfecta, natural y duradera gracias a nuestra tecnología y materiales de alta calidad.</p>
@@ -41,7 +54,9 @@
 			
 			<div class="step">
 				<div class="step-icon">
-					<span aria-hidden="true">📹</span>
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+					</svg>
 				</div>
 				<h3>Acompañamiento virtual</h3>
 				<p>Te ofrecemos seguimiento y soporte a través de Google Meet o WhatsApp para garantizar tu tranquilidad y los mejores resultados.</p>
@@ -49,7 +64,7 @@
 		</div>
 		
 		<div class="tagline">
-			<p>👉 <strong>Te acompañamos en cada etapa, desde el diagnóstico hasta tu nueva sonrisa.</strong></p>
+			<p><strong>Te acompañamos en cada etapa, desde el diagnóstico hasta tu nueva sonrisa.</strong></p>
 		</div>
 	</div>
 </section>
@@ -119,11 +134,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 32px;
 		margin-bottom: 16px;
 		box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 		position: relative;
 		z-index: 2;
+		color: var(--why-accent);
 	}
 
 	.step-icon::before {
@@ -199,7 +214,6 @@
 		.step-icon {
 			width: 70px;
 			height: 70px;
-			font-size: 28px;
 		}
 	}
 </style>
